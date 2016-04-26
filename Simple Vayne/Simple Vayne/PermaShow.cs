@@ -40,7 +40,7 @@ namespace Simple_Vayne
             Text.Draw(Config.TumbleMenu.IgnoreAllChecks ? "Enabled" : "Disabled", Config.TumbleMenu.IgnoreAllChecks ? System.Drawing.Color.GreenYellow : System.Drawing.Color.Red, (int)Position.X + 20 + 149, (int)Position.Y + 33);
             Text.Draw("\nNo AA while stealth : ", System.Drawing.Color.White, (int)Position.X + 15, (int)Position.Y + 33);
             Text.Draw(Config.Misc.NoAAWhileStealth ? "\nEnabled" : "\nDisabled", Config.Misc.NoAAWhileStealth ? System.Drawing.Color.GreenYellow : System.Drawing.Color.Red, (int)Position.X + 20 + 149, (int)Position.Y + 33);
-            Text.Draw("\n\nCondemn mode : ", System.Drawing.Color.White, (int)Position.X + 15, (int)Position.Y + 33);
+            Text.Draw("\n\nTumble mode : ", System.Drawing.Color.White, (int)Position.X + 15, (int)Position.Y + 33);
             Text.Draw(Config.TumbleMenu.Mode == 0 ? "\n\nCursorPos" : "\n\nAuto", System.Drawing.Color.GreenYellow, (int)Position.X + 20 + 149, (int)Position.Y + 33);
 
         }
