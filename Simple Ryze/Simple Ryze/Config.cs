@@ -542,6 +542,10 @@ namespace SimpleRyze
             public static int PermashowX => miscMenu["Permashow.X"].Cast<Slider>().CurrentValue;
             public static int PermashowY => miscMenu["Permashow.Y"].Cast<Slider>().CurrentValue;
 
+            public static bool KillstealQ => miscMenu["KillstealQ"].Cast<CheckBox>().CurrentValue;
+            public static bool KillstealW => miscMenu["KillstealW"].Cast<CheckBox>().CurrentValue;
+            public static bool KillstealE => miscMenu["KillstealE"].Cast<CheckBox>().CurrentValue;
+
             // ReSharper disable once InconsistentNaming
             private static readonly Menu miscMenu;
 
@@ -586,6 +590,12 @@ namespace SimpleRyze
                     {
                         PermaShow.Position[1] = args.NewValue;
                     };
+                miscMenu.AddSeparator(5);
+                miscMenu.AddGroupLabel("Killsteal settings : ");
+                miscMenu.AddSeparator(5);
+                miscMenu.Add("KillstealQ", new CheckBox("Use Q to secure a kill"));
+                miscMenu.Add("KillstealW", new CheckBox("Use W to secure a kill"));
+                miscMenu.Add("KillstealE", new CheckBox("Use E to secure a kill"));
             }
         }
 

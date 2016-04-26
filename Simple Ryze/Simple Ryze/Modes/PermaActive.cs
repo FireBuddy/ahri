@@ -15,7 +15,7 @@ namespace SimpleRyze.Modes
         {
             foreach (var enemy in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(Q.Range)))
             {
-                if (enemy.GetQDamage() > enemy.Health)
+                if (enemy.GetQDamage() > enemy.Health && enemy.IsValidTarget(Q.Range) && Config.MiscMenu.KillstealQ)
                 {
                     var qPrediction = Q.GetPrediction(enemy);
                     if (qPrediction.HitChancePercent >= 70)
@@ -23,21 +23,21 @@ namespace SimpleRyze.Modes
                         Q.Cast(qPrediction.CastPosition);
                     }
                 }
-                if (enemy.GetWDamage() > enemy.Health && enemy.IsValidTarget(W.Range))
+                if (enemy.GetWDamage() > enemy.Health && enemy.IsValidTarget(W.Range) && Config.MiscMenu.KillstealW)
                 {
                     W.Cast(enemy);
                 }
-                if (enemy.GetEDamage() > enemy.Health && enemy.IsValidTarget(E.Range))
+                if (enemy.GetEDamage() > enemy.Health && enemy.IsValidTarget(E.Range) && Config.MiscMenu.KillstealE)
                 {
                     E.Cast(enemy);
                 }
-                if (Config.MiscMenu.UseIgnite && Program.Ignite != null && Program.Ignite.IsReady() && Program.Ignite.IsInRange(enemy))
+                if (Config.MiscMenu.UseIgnite && Program.Ignite != null && Program.Ignite.IsReady() && enemy.IsValidTarget(Program.Ignite.Range))
                 {
                     var damage = Player.Instance.GetSummonerSpellDamage(enemy, DamageLibrary.SummonerSpells.Ignite);
 
-                    if (damage >= Program.CurrentTarget.Health + Program.CurrentTarget.PARRegenRate * 0.4f * 5)
+                    if (damage >= enemy.Health + enemy.PARRegenRate * 0.4f * 5)
                     {
-                        Program.Ignite.Cast(Program.CurrentTarget);
+                        Program.Ignite.Cast(enemy);
                     }
                 }
             }
@@ -92,7 +92,7 @@ namespace SimpleRyze.Modes
                                 .OrderByDescending(TargetSelector.GetPriority)
                                 .ThenByDescending(e => e.Distance(Player.Instance)))
                     {
-                        if(W.IsReady())
+                        if(W.IsReady() && enemy.IsValidTarget(W.Range))
                             W.Cast(enemy);
                     }
                 }

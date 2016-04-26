@@ -82,14 +82,14 @@ namespace SimpleRyze
 
         public static void PrintInfoMessage(string message, bool possibleFlood = true)
         {
-            if (possibleFlood && LastMessageTick + 500 > Game.Time * 1000 && LastMessageString == message)
-                return;
-            
             if (FemaleChampions.Any(key => message.Contains(key)))
             {
                 message = Regex.Replace(message, "him", "her", RegexOptions.IgnoreCase);
                 message = Regex.Replace(message, "his", "hers", RegexOptions.IgnoreCase);
             }
+
+            if (possibleFlood && LastMessageTick + 500 > Game.Time * 1000 && LastMessageString == message)
+                return;
 
             LastMessageTick = Game.Time * 1000;
             LastMessageString = message;

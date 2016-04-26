@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
 using Settings = SimpleRyze.Config.Modes.Combo;
@@ -47,12 +48,9 @@ namespace SimpleRyze.Modes
             {
                 var qPredictionQ = Q.GetPrediction(qTarget);
 
-                if (Helpers.HasRyzeRBuff)
+                if (Helpers.HasRyzeRBuff && qPredictionQ.HitChancePercent >= 60 && qPredictionQ.CollisionObjects.Any(index => index.Distance(qTarget) < 400))
                 {
-                    if (qPredictionQ.HitChancePercent >= 60)
-                    {
-                        Q.Cast(qPredictionQ.CastPosition);
-                    }
+                    Q.Cast(qPredictionQ.CastPosition);
                 }
                 else
                 {
@@ -67,23 +65,9 @@ namespace SimpleRyze.Modes
             {
                 var qPredictionW = Q.GetPrediction(wTarget);
 
-                if (Helpers.HasRyzeRBuff)
+                if (Helpers.HasRyzeRBuff && qPredictionW.HitChancePercent >= 60 && qPredictionW.CollisionObjects.Any(index => index.Distance(wTarget) < 400))
                 {
-                    if (qPredictionW.HitChancePercent >= 60)
-                    {
-                        /*if (qPredictionW.CollisionObjects !=null && qPredictionW.CollisionObjects[0] != null)
-                        {
-                            if (qPredictionW.CollisionObjects[0].Position.Distance(wTarget) < 400)
-                            {
-                                Q.Cast(qPredictionW.CastPosition);
-                            }
-                        }
-                        else
-                        {
-                            Q.Cast(qPredictionW.CastPosition);
-                        }*/
-						Q.Cast(qPredictionW.CastPosition);
-                    }
+                    Q.Cast(qPredictionW.CastPosition);
                 }
                 else
                 {
