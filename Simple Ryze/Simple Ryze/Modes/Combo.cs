@@ -71,7 +71,7 @@ namespace SimpleRyze.Modes
                 {
                     if (qPredictionW.HitChancePercent >= 60)
                     {
-                        if (qPredictionW.CollisionObjects[0] != null)
+                        if (qPredictionW.CollisionObjects !=null && qPredictionW.CollisionObjects[0] != null)
                         {
                             if (qPredictionW.CollisionObjects[0].Position.Distance(wTarget) < 400)
                             {
