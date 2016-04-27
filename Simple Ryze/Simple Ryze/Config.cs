@@ -496,6 +496,13 @@ namespace SimpleRyze
             /// Returns true if DrawPermashow is enabled.
             /// </summary>
             public static bool DrawPermashow => DrawingsMenu["DrawPermashow"].Cast<CheckBox>().CurrentValue;
+
+            /// <summary>
+            /// Returns true if HPBarIndicator is enabled.
+            /// </summary>
+            // ReSharper disable once InconsistentNaming
+            public static bool EnableHPBarIndicator => DrawingsMenu["HPBarIndicator"].Cast<CheckBox>().CurrentValue;
+
             // ReSharper disable once InconsistentNaming
             private static readonly Menu DrawingsMenu;
 
@@ -514,8 +521,10 @@ namespace SimpleRyze
                 DrawingsMenu.Add("DrawQ", new CheckBox("Draw Q range"));
                 DrawingsMenu.Add("DrawW", new CheckBox("Draw W range"));
                 DrawingsMenu.Add("DrawingBorderWidth", new Slider("Border Width", 2, 1, 10));
+                DrawingsMenu.AddSeparator(5);
                 DrawingsMenu.Add("DrawRTime", new CheckBox("Draw R expiry time"));
                 DrawingsMenu.Add("DrawPermashow", new CheckBox("Enable PermaShow"));
+                DrawingsMenu.Add("HPBarIndicator", new CheckBox("Enable HPBarIndicator"));
             }
         }
 

@@ -18,6 +18,9 @@ namespace SimpleRyze
 
         private static void DrawingOnEndScene(EventArgs args)
         {
+            if (!Config.Drawings.Enabled || !Config.Drawings.EnableHPBarIndicator)
+                return;
+
             foreach (var unit in
                 EntityManager.Heroes.Enemies.Where(
                     index => index.IsHPBarRendered && index.IsValidTarget(1200)))
