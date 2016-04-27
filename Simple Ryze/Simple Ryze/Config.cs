@@ -679,18 +679,22 @@ namespace SimpleRyze
             public static class LaneClear
             {
                 public static bool UseQ => ModesMenu["LaneClear.Q"].Cast<CheckBox>().CurrentValue;
-                public static bool UnderTowerFarm => ModesMenu["LaneClear.Tower"].Cast<CheckBox>().CurrentValue;
-                public static int QMana => ModesMenu["LaneClear.Q.Mana"].Cast<Slider>().CurrentValue;
-                public static int EMana => ModesMenu["LaneClear.E.Mana"].Cast<Slider>().CurrentValue;
+                public static bool UseW => ModesMenu["LaneClear.W"].Cast<CheckBox>().CurrentValue;
                 public static bool UseE => ModesMenu["LaneClear.E"].Cast<CheckBox>().CurrentValue;
                 public static bool UseR => ModesMenu["LaneClear.R"].Cast<CheckBox>().CurrentValue;
                 public static bool ROnlyIfNoEnemiesNear => ModesMenu["LaneClear.REnemies"].Cast<CheckBox>().CurrentValue;
+                public static bool UnderTowerFarm => ModesMenu["LaneClear.Tower"].Cast<CheckBox>().CurrentValue;
+                public static int QMana => ModesMenu["LaneClear.Q.Mana"].Cast<Slider>().CurrentValue;
+                public static int WMana => ModesMenu["LaneClear.W.Mana"].Cast<Slider>().CurrentValue;
+                public static int EMana => ModesMenu["LaneClear.E.Mana"].Cast<Slider>().CurrentValue;
 
                 static LaneClear()
                 {
                     ModesMenu.AddGroupLabel("Lane clear / Jungle clear");
                     ModesMenu.Add("LaneClear.Q", new CheckBox("Use Q"));
                     ModesMenu.Add("LaneClear.Q.Mana", new Slider("Minimal mana ({0}%) to use Q", 60));
+                    ModesMenu.Add("LaneClear.W", new CheckBox("Use W", false));
+                    ModesMenu.Add("LaneClear.W.Mana", new Slider("Minimal mana ({0}%) to use W", 60));
                     ModesMenu.Add("LaneClear.E", new CheckBox("Use E"));
                     ModesMenu.Add("LaneClear.E.Mana", new Slider("Minimal mana ({0}%) to use E", 60));
                     ModesMenu.Add("LaneClear.R", new CheckBox("Use R"));

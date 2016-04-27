@@ -86,10 +86,7 @@ namespace SimpleRyze
 
         private static void Orbwalker_OnPreAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
-            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || !SpellManager.Q.IsReady() || !SpellManager.W.IsReady() || !SpellManager.E.IsReady() || args.Target.Distance(Player.Instance) > 450)
-                return;
-
-            if (Config.ExtrasMenu.BlockAaInCombo)
+            if (Config.ExtrasMenu.BlockAaInCombo && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && args.Target is AIHeroClient && args.Target.Distance(Player.Instance) > 400 && (SpellManager.W.IsReady() || SpellManager.E.IsReady() || SpellManager.Q.IsReady()))
                 args.Process = false;
         }
 

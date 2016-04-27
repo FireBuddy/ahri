@@ -22,7 +22,7 @@ namespace SimpleRyze.Modes
 
                 if (Settings.UseR && R.IsReady() &&
                     EntityManager.MinionsAndMonsters.GetJungleMonsters(Player.Instance.Position, W.Range)
-                        .Count(where => @where.HealthPercent > 25) >= 2)
+                        .Count(where => where.HealthPercent > 25) >= 2)
                 {
                     if (Settings.ROnlyIfNoEnemiesNear && Player.Instance.CountEnemiesInRange(1000) == 0)
                     {
@@ -32,6 +32,10 @@ namespace SimpleRyze.Modes
                 if (Settings.UseQ && Q.IsReady() && Player.Instance.ManaPercent >= Settings.QMana && !target.IsDead)
                 {
                     Q.Cast(target);
+                }
+                if (Settings.UseW && W.IsReady() && Player.Instance.ManaPercent >= Settings.WMana && !target.IsDead)
+                {
+                    W.Cast(target);
                 }
                 if (Settings.UseE && E.IsReady() && Player.Instance.ManaPercent >= Settings.EMana && !target.IsDead)
                 {
@@ -48,8 +52,8 @@ namespace SimpleRyze.Modes
                     return;
 
                 if (Settings.UseR && R.IsReady() &&
-                    EntityManager.MinionsAndMonsters.GetJungleMonsters(Player.Instance.Position, W.Range)
-                        .Count(where => @where.HealthPercent > 50) >= 3)
+                    EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy, Player.Instance.Position, W.Range)
+                        .Count(where => where.HealthPercent > 50) >= 3)
                 {
                     if (Settings.ROnlyIfNoEnemiesNear && Player.Instance.CountEnemiesInRange(1000) == 0)
                     {
@@ -68,6 +72,10 @@ namespace SimpleRyze.Modes
                     {
                         Q.Cast(target);
                     }
+                }
+                if (Settings.UseW && W.IsReady() && Player.Instance.ManaPercent >= Settings.WMana && !target.IsDead)
+                {
+                    W.Cast(target);
                 }
                 if (Settings.UseE && E.IsReady() && Player.Instance.ManaPercent >= Settings.EMana && !target.IsDead)
                 {

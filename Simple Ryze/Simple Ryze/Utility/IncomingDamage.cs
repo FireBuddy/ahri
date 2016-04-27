@@ -144,23 +144,24 @@ namespace SimpleRyze.Utility
         {
             IncomingDamages.RemoveAll(match => Game.Time*1000 > match.Tick + 800);
 
-            var damage = 0f;
-
-            foreach (var damages in IncomingDamages)
-            {
-                damage += damages.Damage;
-            }
+            var damage = IncomingDamages.Sum(damages => damages.Damage);
 
             if (Player.Instance.IsDead || !Program.Seraph.IsReady())
                 return;
 
-            var heatlhPercentTaken = Math.Min(100, damage/Player.Instance.Health*100);
+            var heatlhPercentTaken = Math.Min(100, damage/(Player.Instance.Health + Player.Instance.Mana * 0.2f)*100);
 
-            if (damage >= Player.Instance.Health)
-                Program.Seraph.Cast();
 
-            else if (heatlhPercentTaken >= 30)
+            if (damage >= Player.Instance.Health-15)
+            {
+                Helpers.PrintInfoMessage("Casting Seraph's because something is going to kill you.");
                 Program.Seraph.Cast();
+            }
+            else if (heatlhPercentTaken >= 40)
+            {
+                Helpers.PrintInfoMessage("Casting Seraph's because something is going to take more than 40% of your health.");
+                Program.Seraph.Cast();
+            }
         }
     }
 
