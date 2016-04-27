@@ -655,14 +655,18 @@ namespace SimpleRyze
             {
                 public static bool UseQ => ModesMenu["Harass.Q"].Cast<CheckBox>().CurrentValue;
                 public static int QMana => ModesMenu["Harass.Q.Mana"].Cast<Slider>().CurrentValue;
-                public static bool UseW => ModesMenu["Harass.E"].Cast<CheckBox>().CurrentValue;
-                public static int WMana => ModesMenu["Harass.E.Mana"].Cast<Slider>().CurrentValue;
+                public static bool UseW => ModesMenu["Harass.W"].Cast<CheckBox>().CurrentValue;
+                public static int WMana => ModesMenu["Harass.W.Mana"].Cast<Slider>().CurrentValue;
+                public static bool UseE => ModesMenu["Harass.E"].Cast<CheckBox>().CurrentValue;
+                public static int EMana => ModesMenu["Harass.E.Mana"].Cast<Slider>().CurrentValue;
 
                 static Harass()
                 {
                     ModesMenu.AddGroupLabel("Harass");
                     ModesMenu.Add("Harass.Q", new CheckBox("Use Q"));
                     ModesMenu.Add("Harass.Q.Mana", new Slider("Minimal mana ({0}%) to use Q", 60));
+                    ModesMenu.Add("Harass.W", new CheckBox("Use W"));
+                    ModesMenu.Add("Harass.W.Mana", new Slider("Minimal mana ({0}%) to use W", 40));
                     ModesMenu.Add("Harass.E", new CheckBox("Use E"));
                     ModesMenu.Add("Harass.E.Mana", new Slider("Minimal mana ({0}%) to use E", 40));
                 }

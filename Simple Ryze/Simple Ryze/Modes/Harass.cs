@@ -26,13 +26,22 @@ namespace SimpleRyze.Modes
                 }
             }
 
-            if (!Settings.UseW || !W.IsReady() || !(Player.Instance.ManaPercent >= Settings.WMana))
+            if (Settings.UseW && W.IsReady() && Player.Instance.ManaPercent >= Settings.WMana)
+            {
+                var wTarget = TargetSelector.GetTarget(W.Range, DamageType.Magical);
+                if (wTarget != null)
+                {
+                    W.Cast(wTarget);
+                }
+            }
+
+            if (!Settings.UseE || !E.IsReady() || !(Player.Instance.ManaPercent >= Settings.EMana))
                 return;
 
-            var wTarget = TargetSelector.GetTarget(W.Range, DamageType.Magical);
-            if (wTarget != null)
+            var eTarget = TargetSelector.GetTarget(E.Range, DamageType.Magical);
+            if (eTarget != null)
             {
-                W.Cast(wTarget);
+                E.Cast(eTarget);
             }
         }
     }
