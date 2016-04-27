@@ -385,11 +385,20 @@ namespace Simple_Twitch
                         _canusebotrk = false;
                     }
 
-                    if (WInCombo && _aacancelpossible && ArgsW.IsReady() && ArgsW.IsInRange(target) &&
+                    if (WInCombo && _combo["WMode"].Cast<ComboBox>().CurrentValue == 1 && _aacancelpossible && ArgsW.IsReady() && ArgsW.IsInRange(target) &&
                         Player.Instance.Mana > 120)
                     {
                         var wPrediction = ArgsW.GetPrediction(target);
-                        if (wPrediction.HitChance >= HitChance.Low)
+                        if (wPrediction.HitChance >= HitChance.Medium)
+                        {
+                            ArgsW.Cast(wPrediction.CastPosition);
+                        }
+                    } else if (WInCombo && _combo["WMode"].Cast<ComboBox>().CurrentValue == 0 && ArgsW.IsReady() &&
+                               ArgsW.IsInRange(target) &&
+                               Player.Instance.Mana > 120)
+                    {
+                        var wPrediction = ArgsW.GetPrediction(target);
+                        if (wPrediction.HitChance >= HitChance.Medium)
                         {
                             ArgsW.Cast(wPrediction.CastPosition);
                         }
@@ -688,6 +697,8 @@ namespace Simple_Twitch
             _combo.Add("ComboQ", new CheckBox("Use Q."));
             _combo.Add("MinEnemiesForQ", new Slider("Use Q when {0} enemy/es is/are nearby.", 3, 1, 5));
             _combo.Add("ComboW", new CheckBox("Use W."));
+            _combo.Add("WMode", new ComboBox("W Mode", new[] {"Always", "Only after AutoAttack"}));
+            _combo.AddSeparator(15);
             _combo.Add("UseeInCombo", new CheckBox("Use E."));
             _combo.Add("ComboE", new Slider("Use E on enemy with {0} venom stacks.", 6, 1, 6));
             _combo.AddSeparator();
