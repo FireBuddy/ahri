@@ -17,7 +17,7 @@ namespace Simple_Twitch
     internal static class Program
     {
         private static Menu _menu;
-        private static Menu _combo, _harass, _laneClear, _jungleClear, _drawings, _misc;
+        private static Menu _combo, _harass, _laneClear, _jungleClear, _drawings, _misc, _ewhitelist;
         public static Spell.Active ArgsQ, ArgsE, ArgsR;
         public static Spell.Skillshot ArgsW;
 
@@ -181,7 +181,7 @@ namespace Simple_Twitch
             if (!ArgsE.IsReady()) return;
 
             foreach (var t in EntityManager.Heroes.Enemies.Where(
-                enemy => enemy.IsValid && enemy.HasBuff("twitchdeadlyvenom") && enemy.IsValidTarget(ArgsE.Range)))
+                enemy => enemy.IsValid && enemy.HasBuff("twitchdeadlyvenom") && enemy.IsValidTarget(ArgsE.Range) && CanUseEOnEnemy(enemy.BaseSkinName)))
             {
                 if (ERange && CountEStacks(t) >= ERangeStacks &&
                     t.Distance(Player.Instance.ServerPosition) >= ArgsE.Range - 200)
@@ -394,7 +394,7 @@ namespace Simple_Twitch
                             ArgsW.Cast(wPrediction.CastPosition);
                         }
                     }
-                    if (UseeInCombo && ArgsE.IsReady() && ArgsE.IsInRange(target) && CountEStacks(target) >= EInCombo)
+                    if (UseeInCombo && ArgsE.IsReady() && ArgsE.IsInRange(target) && CountEStacks(target) >= EInCombo && CanUseEOnEnemy(target.BaseSkinName))
                     {
                         ArgsE.Cast();
                     }
@@ -501,12 +501,12 @@ namespace Simple_Twitch
 
             var hero = target as AIHeroClient;
 
-            if (IsEnemyUnkillable(hero) || HasSpellShield(hero))
+            if (hero == null || IsEnemyUnkillable(hero) || HasSpellShield(hero))
             {
                 return false;
             }
 
-            if (hero == null || hero.ChampionName != "Blitzcrank")
+            if (hero.ChampionName != "Blitzcrank")
                 return GetFinalEDamage(target) >= GetTotalHealth(target);
 
             if (!hero.HasBuff("BlitzcrankManaBarrierCD") && !hero.HasBuff("ManaBarrier"))
@@ -673,6 +673,11 @@ namespace Simple_Twitch
             return target.Health + target.AllShield + target.AttackShield + target.MagicShield + (target.HPRegenRate*2);
         }
 
+        public static bool CanUseEOnEnemy(string championName)
+        {
+            return _ewhitelist["Use.E.On" + championName].Cast<CheckBox>().CurrentValue;
+        }
+
         private static void CreateMenu()
         {
             _menu = MainMenu.AddMenu("Simple Twitch", "stwitch");
@@ -739,6 +744,15 @@ namespace Simple_Twitch
             _misc.Add("eRangeStacks", new Slider("Minimal venon stacks", 4, 1, 6));
             _misc.Add("eBeforeDeath", new CheckBox("Use E before death."));
             _misc.Add("eHealthPercent", new Slider("Use E below {0}% health", 10, 1));
+
+            _ewhitelist = _menu.AddSubMenu("E Whitelist");
+            _ewhitelist.AddGroupLabel("E Whitelist");
+
+            foreach (var enemy in EntityManager.Heroes.Enemies)
+            {
+                _ewhitelist.Add("Use.E.On" + enemy.BaseSkinName, new CheckBox(enemy.BaseSkinName));
+            }
+
         }
     }
 }
