@@ -53,6 +53,7 @@ namespace SimpleRyze.Utility
             {"XinZhao",  new GapcloserInfo(DangerLevel.High, 5, 0)},
             {"Yasuo",  new GapcloserInfo(DangerLevel.High, 5, 0)},
             {"Zac",  new GapcloserInfo(DangerLevel.High, 5, 0)},
+            {"Zed",  new GapcloserInfo(DangerLevel.High, 5, 0)},
             {"Ziggs",  new GapcloserInfo(DangerLevel.Medium, 2, 0)}
         };
 
