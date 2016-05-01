@@ -7,6 +7,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
+using EloBuddy.SDK.Utils;
 using SharpDX;
 using Simple_Vayne.Utility;
 using Color = System.Drawing.Color;
@@ -68,6 +69,7 @@ namespace Simple_Vayne
             Obj_AI_Base.OnBuffLose += Obj_AI_Base_OnBuffLose;
             Drawing.OnEndScene += Drawing_OnEndScene;
             PermaShow.Initalize();
+            //Evade.Initializer();
 
             foreach (var enemy in EntityManager.Heroes.Enemies)
             {
@@ -300,7 +302,7 @@ namespace Simple_Vayne
                         var flagpolygon = new Geometry.Polygon.Circle(FlagPos, 150);
                         var playerpolygon = new Geometry.Polygon.Circle(Player.Instance.Position, 150);
 
-                        for (var i = 0; i < 1000; i += 25)
+                        for (var i = 900; i > 0; i -= 100)
                         {
                             if (flagpolygon.IsInside(enemy.Position.Extend(args.End, i)) && playerpolygon.IsInside(enemy.ServerPosition.Extend(args.End, i)))
                             {
@@ -496,9 +498,32 @@ namespace Simple_Vayne
         {
             if (CurrentTarget != null && Config.Drawings.CurrentTarget)
             {
-                var polygon = new Geometry.Polygon.Circle(CurrentTarget.Position, CurrentTarget.BoundingRadius);
-                polygon.Draw(Color.DeepPink, 3);
+                Circle.Draw(SharpDX.Color.DeepPink, CurrentTarget.BoundingRadius, 2, CurrentTarget.Position);
             }
+
+            /*var unit =
+                EntityManager.Heroes.Enemies.Where(index => index.IsValidTarget(1200))
+                    .OrderBy(by => by.Distance(Player.Instance)).FirstOrDefault();
+
+            if (unit == null)
+            {
+                return;
+            }
+            var enemies = Player.Instance.CountEnemiesInRange(1200);
+            var polygons = Helpers.SegmentedAutoattackPolygons();
+            var positions = new List<IEnumerable<Vector2>>();
+
+            for (var i = 0; i < 4; i++)
+            {
+                positions.Add(polygons[i].Points.Where(e => e.ToVector3().ExtendPlayerVector().IsPositionSafe() && e.ToVector3().ExtendPlayerVector().Distance(unit, true) > (enemies <= 2 ? 150 * 150 : 300 * 300)));
+            }
+            foreach (var points in positions)
+            {
+                foreach (var point in points)
+                {
+                    Circle.Draw(SharpDX.Color.Green, 25, 2, point.ToVector3().ExtendPlayerVector());
+                }
+            }*/
         }
     }
 }

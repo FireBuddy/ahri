@@ -163,11 +163,11 @@ namespace Simple_Vayne.Modes
                         return;
 
                     if (Player.Instance.HealthPercent <= menudata.PercentHp &&
-                        Player.Instance.Position.CountEnemiesInRange(1200) <= menudata.EnemiesNear && Helpers.GetTumbleEndPos(gapclosers.Sender.ServerPosition.ExtendPlayerVector()).Distance(Player.Instance) > 280)
+                        Player.Instance.Position.CountEnemiesInRange(1200) <= menudata.EnemiesNear && gapclosers.Sender.ServerPosition.ExtendPlayerVector().GetTumbleEndPos().Distance(Player.Instance) > 280)
                     {
                         if (menudata.Delay <= 10)
                         {
-                            if (Config.TumbleMenu.Backwards)
+                            if (Config.TumbleMenu.Backwards && gapclosers.Sender.ServerPosition.ExtendPlayerVector(-300).IsPositionSafe())
                             {
                                 Q.Cast(gapclosers.Sender.ServerPosition.ExtendPlayerVector(-280));
                             }
@@ -176,7 +176,7 @@ namespace Simple_Vayne.Modes
                         {
                             Core.DelayAction(delegate
                             {
-                                if (Config.TumbleMenu.Backwards)
+                                if (Config.TumbleMenu.Backwards && gapclosers.Sender.ServerPosition.ExtendPlayerVector(-300).IsPositionSafe())
                                 {
                                     Q.Cast(gapclosers.Sender.ServerPosition.ExtendPlayerVector(-280));
                                 }

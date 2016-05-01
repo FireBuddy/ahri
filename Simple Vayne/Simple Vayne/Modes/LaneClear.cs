@@ -34,6 +34,31 @@ namespace Simple_Vayne.Modes
 
         private void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
         {
+            /*if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            {
+                foreach (
+                    var enemyChampion in EntityManager.Heroes.Enemies.Where(
+                            enemy => enemy.IsValidTarget(900)).OrderBy(enemy => enemy.HealthPercent))
+                {
+                    if (enemyChampion != null)
+                    {
+                        var polygon = new Geometry.Polygon.Circle(Game.CursorPos.GetTumbleEndPos(), Player.Instance.GetAutoAttackRange());
+
+                        if (polygon.IsInside(enemyChampion))
+                        {
+                            Q.Cast(Game.CursorPos.ExtendPlayerVector(250));
+                            Core.DelayAction(() =>
+                            {
+                                if (!target.IsDead)
+                                {
+                                    Player.ForceIssueOrder(GameObjectOrder.AttackUnit, target.Position, false);
+                                }
+                            },Game.Ping);
+                        }
+                    }
+                }
+            }*/
+
             var unit = target as Obj_AI_Minion;
 
             if (unit == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
@@ -42,6 +67,8 @@ namespace Simple_Vayne.Modes
                 return;
             }
 
+            var sidePolygon = Helpers.GetSidePolygons();
+            var positions = new List<Vector2>();
             var qdamage = Player.Instance.GetAutoAttackDamage(unit) + Player.Instance.TotalAttackDamage * Helpers.QAdditionalDamage[Q.Level] + (unit.GetSilverStacks() == 2 ? unit.CalculateWDamage() : 0);
 
             var entities = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy,
@@ -51,24 +78,38 @@ namespace Simple_Vayne.Modes
 
             if (objAiMinions.Length >= 2)
             {
-                var sidePolygon = Helpers.GetSidePolygons();
-                var positions = new List<Vector2>();
-
-                for (var i = 0; i < 2; i++)
+                if (Config.TumbleMenu.Mode == 1)
                 {
-                    positions.Add(sidePolygon[i].Points.Where(index =>
+                    for (var i = 0; i < 2; i++)
+                    {
+                        positions.Add(sidePolygon[i].Points.Where(index =>
+                        {
+                            var objAiMinion = objAiMinions.LastOrDefault();
+
+                            return objAiMinion != null &&
+                                   index.ToVector3()
+                                       .ExtendPlayerVector()
+                                       .IsInRange(objAiMinion.ServerPosition, Player.Instance.GetAutoAttackRange()) &&
+                                   index.ToVector3().ExtendPlayerVector().IsPositionSafe();
+                        }).OrderByDescending(index => index.Distance(unit.ServerPosition)).FirstOrDefault());
+                    }
+                    Q.Cast(positions.OrderByDescending(index => index.Distance(unit)).FirstOrDefault(x =>
                     {
                         var objAiMinion = objAiMinions.LastOrDefault();
 
-                        return objAiMinion != null && index.ToVector3().ExtendPlayerVector().IsInRange(objAiMinion.ServerPosition, Player.Instance.GetAutoAttackRange()) && index.ToVector3().ExtendPlayerVector().IsPositionSafe();
-                    }).OrderByDescending(index => index.Distance(unit.ServerPosition)).FirstOrDefault());
+                        return objAiMinion != null &&
+                               x.ToVector3()
+                                   .ExtendPlayerVector()
+                                   .IsInRange(objAiMinion.ServerPosition, Player.Instance.GetAutoAttackRange());
+                    }).ToVector3().ExtendPlayerVector(200));
                 }
-                Q.Cast(positions.OrderByDescending(index => index.Distance(unit)).FirstOrDefault(x =>
+                else
                 {
-                    var objAiMinion = objAiMinions.LastOrDefault();
-
-                    return objAiMinion != null && x.ToVector3().ExtendPlayerVector().IsInRange(objAiMinion.ServerPosition, Player.Instance.GetAutoAttackRange());
-                }).ToVector3().ExtendPlayerVector(200));
+                    if (Game.CursorPos.GetTumbleEndPos().IsPositionSafe())
+                    {
+                        Q.Cast(Game.CursorPos.ExtendPlayerVector(250));
+                    }
+                }
             }
             Orbwalker.OnPostAttack -= Orbwalker_OnPostAttack;
         }

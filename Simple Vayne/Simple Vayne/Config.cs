@@ -187,7 +187,7 @@ namespace Simple_Vayne
                             .Select(x => Gapcloser.GapCloserList.FirstOrDefault(key => key.ChampName == x.ChampionName)))
                 {
                     var dangerlevel = Gapclosers.GapcloserDangerLevel.FirstOrDefault(pair => pair.Key == data.ChampName);
-                    
+
                     gapcloserMenu.AddGroupLabel(data.ChampName + " " + data.SpellSlot + " [" + data.SpellName + "]");
 
                     gapcloserMenu.Add("Enabled." + data.ChampName, new CheckBox("Enabled")).OnValueChange +=
@@ -437,6 +437,14 @@ namespace Simple_Vayne
             }
 
             /// <summary>
+            /// Returns Q.BlockQIfEnemyIsOutsideRange checkbox menu value
+            /// </summary>
+            public static bool BlockQIfEnemyIsOutsideAaRange
+            {
+                get { return MenuTumble["Q.BlockQIfEnemyIsOutsideRange"].Cast<CheckBox>().CurrentValue; }
+            }
+
+            /// <summary>
             /// Returns Q.IgnoreAllChecks checkbox menu value
             /// </summary>
             public static bool IgnoreAllChecks
@@ -451,7 +459,7 @@ namespace Simple_Vayne
                 MenuTumble.AddGroupLabel("Tumble settings : ");
                 MenuTumble.AddSeparator(5);
                 
-                MenuTumble.Add("Q.Mode", new ComboBox("Q Mode", new[] { "CursorPos", "Auto" }, 1));
+                MenuTumble.Add("Q.Mode", new ComboBox("Q Mode", new[] { "CursorPos", "Auto" }));
                 MenuTumble.AddSeparator(5);
                 MenuTumble.Add("Q.Gapcloser", new CheckBox("Use Q as a gapcloser if enemy is escaping", false));
                 MenuTumble.AddLabel("Uses Q as a gapcloser if an enemy is escaping and is killable from an empovered autoattack");
@@ -464,6 +472,8 @@ namespace Simple_Vayne
                 MenuTumble.AddSeparator(5);
                 MenuTumble.Add("Q.To2StacksOnly", new CheckBox("Use Q only on 2 W stacks", false));
                 MenuTumble.AddLabel("Uses Q only if an enemy has 2 W stacks.");
+                MenuTumble.Add("Q.BlockQIfEnemyIsOutsideRange", new CheckBox("Block Q if enemy will leave range", false));
+                MenuTumble.AddLabel("Block Q if enemy is outside my AutoAttack range. Only for Auto tumble mode.");
                 MenuTumble.AddSeparator(5);
                 MenuTumble.Add("Q.IgnoreAllChecks", new KeyBind("Ignore all safety checks", false, KeyBind.BindTypes.PressToggle, 'H')).OnValueChange +=
                     delegate (ValueBase<bool> sender, ValueBase<bool>.ValueChangeArgs args)

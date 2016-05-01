@@ -34,7 +34,7 @@ namespace Simple_Vayne.Utility
             {"Khazix",  new GapcloserInfo(DangerLevel.High, 5, 0)},
             {"LeBlanc",  new GapcloserInfo(DangerLevel.High, 5, 0)},
             {"LeeSin",  new GapcloserInfo(DangerLevel.High, 5, 0)},
-            {"Leona",  new GapcloserInfo(DangerLevel.High, 5, 0)},
+            {"Leona",  new GapcloserInfo(DangerLevel.High, 5, 500)},
             {"Lucian",  new GapcloserInfo(DangerLevel.Low, 2, 0)},
             {"Malphite",  new GapcloserInfo(DangerLevel.High, 5, 0)},
             {"MasterYi",  new GapcloserInfo(DangerLevel.High, 5, 0)},
@@ -53,6 +53,7 @@ namespace Simple_Vayne.Utility
             {"XinZhao",  new GapcloserInfo(DangerLevel.High, 5, 0)},
             {"Yasuo",  new GapcloserInfo(DangerLevel.High, 5, 0)},
             {"Zac",  new GapcloserInfo(DangerLevel.High, 5, 0)},
+            {"Zed",  new GapcloserInfo(DangerLevel.High, 5, 0)},
             {"Ziggs",  new GapcloserInfo(DangerLevel.Medium, 2, 0)}
         };
 

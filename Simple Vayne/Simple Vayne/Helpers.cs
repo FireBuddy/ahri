@@ -288,12 +288,25 @@ namespace Simple_Vayne
                 : Player.Instance.ServerPosition.Extend(vector, distance).ToVector3();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="unit"></param>
+        /// <param name="range"></param>
+        /// <returns></returns>
         public static bool IsInsideUnitsRange(this Vector3 vector, AIHeroClient unit, float range)
         {
             var polygon = new Geometry.Polygon.Circle(unit.ServerPosition, range);
             return polygon.IsInside(vector);
         }
 
+        /// <summary>
+        /// Checks if the vector is inside enemy AutoAttack range
+        /// </summary>
+        /// <param name="vector">Vector3 position</param>
+        /// <param name="range">Range of enemy AutoAttack range</param>
+        /// <returns></returns>
         public static bool IsInsideEnemyRange(this Vector3 vector, float range)
         {
             return
@@ -303,6 +316,13 @@ namespace Simple_Vayne
                     .FirstOrDefault();
         }
 
+        /// <summary>
+        /// Checks if the vector is inside enemy AutoAttack range
+        /// </summary>
+        /// <param name="vector">Vector3 position</param>
+        /// <param name="range">Range of enemy AutoAttack range</param>
+        /// <param name="countEnemies">Set to to check how much enemies is inside</param>
+        /// <returns></returns>
         public static int IsInsideEnemyRange(this Vector3 vector, float range, bool countEnemies)
         {
             return
@@ -312,11 +332,21 @@ namespace Simple_Vayne
                     .Count();
         }
 
+        /// <summary>
+        /// Counts melee champions in the given range
+        /// </summary>
+        /// <param name="range">Range</param>
+        /// <returns>Number of enemies</returns>
         public static int CountMeelesInRange(float range)
         {
             return EntityManager.Heroes.Enemies.Count(index => index.IsValidTarget(range) && index.IsMelee);
         }
 
+        /// <summary>
+        /// Gets if the position is safe or not
+        /// </summary>
+        /// <param name="vec">Vector3 position</param>
+        /// <returns><c>True</c> if position is safe</returns>
         public static bool IsPositionSafe(this Vector3 vec)
         {
             var player = Player.Instance;
@@ -339,58 +369,96 @@ namespace Simple_Vayne
             {
                 if (dangerlevel == 0)
                 {
-                    if (meeles == 0 && enemies == 1) // 1v1 vs a ranged champion
-                    {
-                        var heroClient = enemy.FirstOrDefault();
+                    var playerhp = Player.Instance.HealthPercent;
 
-                        if (heroClient != null && heroClient.IsRanged &&
-                            player.HealthPercent >= heroClient.HealthPercent)
-                        {
-                            return true;
-
-                        }
-                        else if (heroClient != null && heroClient.IsRanged && !vector.IsInsideUnitsRange(heroClient, heroClient.GetAutoAttackRange()) &&
-                                 player.HealthPercent - 25 > heroClient.HealthPercent)
-                        {
-                            return true;
-                        }
-                    }
-                    else if (meeles == 1 && enemies == 1)
-                    {
-                        var heroClient = enemy.FirstOrDefault();
-                        if (heroClient != null && heroClient.IsMelee && !vector.IsInsideUnitsRange(heroClient, heroClient.GetAutoAttackRange() * 2))
-                        {
-                            return true;
-                        }
-                    }
-                    else if (enemies >= 2 && allies >= 1)
+                    if (enemies == 1 && meeles == 0)
                     {
                         return true;
+                    }
+
+                    if (enemies == 1 && meeles == 1)
+                    {
+                        var closest = enemy.OrderBy(x => x.Distance(vector)).FirstOrDefault();
+                        var positionAfter = Prediction.PredictUnitPosition(closest, 250);
+
+                        if (closest != null && (vector.Distance(positionAfter, true) > 250 * 250 && closest.HealthPercent > playerhp))
+                        {
+                            return true;
+                        }
+                        if (closest != null && playerhp > closest.HealthPercent)
+                        {
+                            return true;
+                        }
+                    }
+                    else if (enemies > allies)
+                    {
+                        return (from enemyTarget in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(1200))
+                                let positionAfter = Prediction.PredictUnitPosition(enemyTarget, 250)
+                                select
+                                    new Geometry.Polygon.Circle(positionAfter,
+                                        enemyTarget.IsMelee
+                                            ? enemyTarget.GetAutoAttackRange() + 350
+                                            : enemyTarget.GetAutoAttackRange() + 150)).Any(
+                                            polygonCircle => polygonCircle.IsOutside(vector.To2D()));
+                    }
+
+                    else if (enemies <= allies)
+                    {
+                        return (from enemyTarget in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(1200))
+                                let positionAfter = Prediction.PredictUnitPosition(enemyTarget, 250)
+                                select
+                                    new Geometry.Polygon.Circle(positionAfter,
+                                        enemyTarget.IsMelee
+                                            ? enemyTarget.GetAutoAttackRange() + 150
+                                            : enemyTarget.GetAutoAttackRange())).Any(
+                                            polygonCircle => polygonCircle.IsOutside(vector.To2D()));
                     }
                 }
                 else if (dangerlevel > 0 && dangerlevel < 150)
                 {
-                    if (vector.IsInsideEnemyRange(500, true) == 0)
-                        return true;
+                    var playerhp = Player.Instance.HealthPercent;
 
-                    if (allies > enemies && meeles < 2)
+                    if (enemies == 1 && meeles == 0)
                     {
-                        var melee = enemy.Where(index => index.IsMelee);
-                        var aiHeroClients = melee as AIHeroClient[] ?? melee.ToArray();
-                        var count = aiHeroClients.Count(index => vector.IsInsideUnitsRange(index, index.GetAutoAttackRange() * 2));
+                        return true;
+                    }
 
-                        if (count == 0)
+                    if (enemies == 1 && meeles == 1)
+                    {
+                        var closest = enemy.OrderBy(x => x.Distance(vector)).FirstOrDefault();
+                        var positionAfter = Prediction.PredictUnitPosition(closest, 250);
+
+                        if (closest != null && (vector.Distance(positionAfter, true) > 300 * 300 && closest.HealthPercent > playerhp))
                         {
                             return true;
                         }
-                        else
+                        if (closest != null && playerhp > closest.HealthPercent)
                         {
-                            var firstOrDefault = aiHeroClients.OrderBy(index => index.Distance(vector)).FirstOrDefault();
-                            if (firstOrDefault != null && firstOrDefault.HealthPercent <= 40 && player.HealthPercent > 50)
-                            {
-                                return true;
-                            }
+                            return true;
                         }
+                    }
+                    else if (enemies > allies)
+                    {
+                        return (from enemyTarget in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(2000))
+                                let positionAfter = Prediction.PredictUnitPosition(enemyTarget, 500)
+                                select
+                                    new Geometry.Polygon.Circle(positionAfter,
+                                        enemyTarget.IsMelee
+                                            ? enemyTarget.GetAutoAttackRange() + 600
+                                            : enemyTarget.GetAutoAttackRange() + 150)).Any(
+                                            polygonCircle => polygonCircle.IsOutside(vector.To2D()));
+                    }
+
+                    else if (enemies <= allies)
+                    {
+                        return (from enemyTarget in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(2000))
+                                let positionAfter = Prediction.PredictUnitPosition(enemyTarget, 500)
+                                select
+                                    new Geometry.Polygon.Circle(positionAfter,
+                                        enemyTarget.IsMelee
+                                            ? enemyTarget.GetAutoAttackRange() + 450
+                                            : enemyTarget.GetAutoAttackRange() + 150)).Any(
+                                            polygonCircle => polygonCircle.IsOutside(vector.To2D()));
                     }
                 }
                 else if (dangerlevel > 150 && dangerlevel < 200)
@@ -401,25 +469,50 @@ namespace Simple_Vayne
                     if (GetTumbleEndPos(vector).Distance(Player.Instance) < 280)
                         return false;
 
-                    var melee = enemy.Where(index => index.IsMelee);
-                    var aiHeroClients = melee as AIHeroClient[] ?? melee.ToArray();
-                    var count = aiHeroClients.Count(index => vector.IsInsideUnitsRange(index, index.GetAutoAttackRange() * 2));
+                    var playerhp = Player.Instance.HealthPercent;
 
-                    if (count == 0)
+                    if (enemies == 1 && meeles == 0)
                     {
                         return true;
                     }
-                    else
+
+                    if (enemies == 1 && meeles == 1)
                     {
-                        var firstOrDefault = aiHeroClients.OrderBy(index => index.Distance(vector)).FirstOrDefault();
-                        if (firstOrDefault != null && firstOrDefault.HealthPercent <= 40 && player.HealthPercent > 50)
+                        var closest = enemy.OrderBy(x => x.Distance(vector)).FirstOrDefault();
+                        var positionAfter = Prediction.PredictUnitPosition(closest, 250);
+
+                        if (closest != null && (vector.Distance(positionAfter, true) > 400 * 400 && closest.HealthPercent > playerhp))
+                        {
+                            return true;
+                        }
+                        if (closest != null && playerhp > closest.HealthPercent)
                         {
                             return true;
                         }
                     }
-                } else if (dangerlevel > 200)
-                {
-                    return false;
+                    else if (enemies > allies)
+                    {
+                        return (from enemyTarget in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(2000))
+                                let positionAfter = Prediction.PredictUnitPosition(enemyTarget, 500)
+                                select
+                                    new Geometry.Polygon.Circle(positionAfter,
+                                        enemyTarget.IsMelee
+                                            ? enemyTarget.GetAutoAttackRange() + 600
+                                            : enemyTarget.GetAutoAttackRange() + 300)).Any(
+                                            polygonCircle => polygonCircle.IsOutside(vector.To2D()));
+                    }
+
+                    else if (enemies <= allies)
+                    {
+                        return (from enemyTarget in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(2000))
+                                let positionAfter = Prediction.PredictUnitPosition(enemyTarget, 500)
+                                select
+                                    new Geometry.Polygon.Circle(positionAfter,
+                                        enemyTarget.IsMelee
+                                            ? enemyTarget.GetAutoAttackRange() + 450
+                                            : enemyTarget.GetAutoAttackRange() + 300)).Any(
+                                            polygonCircle => polygonCircle.IsOutside(vector.To2D()));
+                    }
                 }
             }
             else
@@ -429,11 +522,14 @@ namespace Simple_Vayne
                 if (enemies == 1 && meeles == 0)
                 {
                     return true;
-                } else if (enemies == 1 && meeles == 1)
+                }
+
+                if (enemies == 1 && meeles == 1)
                 {
                     var closest = enemy.OrderBy(x => x.Distance(vector)).FirstOrDefault();
+                    var positionAfter = Prediction.PredictUnitPosition(closest, 250);
 
-                    if (closest != null && (vector.Distance(closest) > 350 && closest.HealthPercent > playerhp))
+                    if (closest != null && (vector.Distance(positionAfter, true) > 250*250 && closest.HealthPercent > playerhp))
                     {
                         return true;
                     }
@@ -441,18 +537,39 @@ namespace Simple_Vayne
                     {
                         return true;
                     }
-                } else if (enemies > allies)
+                }
+                else if (enemies > allies)
                 {
-                    return EntityManager.Heroes.Enemies.Any(x => x.IsValidTarget(1200) && !x.IsInRange(vector, x.GetAutoAttackRange() + 250));
-                } else if (enemies <= allies)
+                    return (from enemyTarget in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(1200))
+                        let positionAfter = Prediction.PredictUnitPosition(enemyTarget, 250)
+                        select
+                            new Geometry.Polygon.Circle(positionAfter,
+                                enemyTarget.IsMelee
+                                    ? enemyTarget.GetAutoAttackRange() + 350
+                                    : enemyTarget.GetAutoAttackRange() + 150)).Any(
+                                        polygonCircle => polygonCircle.IsOutside(vector.To2D()));
+                }
+
+                else if (enemies <= allies)
                 {
-                    return EntityManager.Heroes.Enemies.Any(
-                            x => x.IsValidTarget(1200) && !x.IsInRange(vector, x.GetAutoAttackRange() + 150));
+                    return (from enemyTarget in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(1200))
+                            let positionAfter = Prediction.PredictUnitPosition(enemyTarget, 250)
+                            select
+                                new Geometry.Polygon.Circle(positionAfter,
+                                    enemyTarget.IsMelee
+                                        ? enemyTarget.GetAutoAttackRange() + 150
+                                        : enemyTarget.GetAutoAttackRange())).Any(
+                                        polygonCircle => polygonCircle.IsOutside(vector.To2D()));
                 }
             }
             return false;
         }
 
+        /// <summary>
+        /// Prints info message
+        /// </summary>
+        /// <param name="message">The message string</param>
+        /// <param name="possibleFlood">Set to true if there is a flood possibility</param>
         public static void PrintInfoMessage(string message, bool possibleFlood = true)
         {
             if (FemaleChampions.Any(key => message.Contains(key)))
@@ -471,7 +588,12 @@ namespace Simple_Vayne
         }
 
 
-        public static Vector3 GetTumbleEndPos(Vector3 startpos)
+        /// <summary>
+        /// Gets the tumble end position
+        /// </summary>
+        /// <param name="startpos">Vector3 start position</param>
+        /// <returns></returns>
+        public static Vector3 GetTumbleEndPos(this Vector3 startpos)
         {
             if (startpos == Vector3.Zero)
                 return Vector3.Zero;
@@ -481,6 +603,11 @@ namespace Simple_Vayne
             return !vector.IsWall() ? vector.ToVector3() : CutVectorNearWall(vector);
         }
 
+        /// <summary>
+        /// Cuts vector near wall
+        /// </summary>
+        /// <param name="from">vector2 position</param>
+        /// <returns></returns>
         public static Vector3 CutVectorNearWall(Vector2 from)
         {
             var distance = Player.Instance.Position.Distance(from);

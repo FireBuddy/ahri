@@ -87,7 +87,9 @@ namespace Simple_Vayne.Modes
         {
             var hero = target as AIHeroClient;
 
-            if (hero == null || hero.IsDead || hero.IsZombie || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || (Tumble.To2StacksOnly && hero.GetSilverStacks() != 1))
+            if (hero == null || hero.IsDead || hero.IsZombie ||
+                !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) ||
+                (Tumble.To2StacksOnly && hero.GetSilverStacks() != 1))
             {
                 Orbwalker.OnPostAttack -= Orbwalker_OnPostAttack;
                 return;
@@ -109,83 +111,66 @@ namespace Simple_Vayne.Modes
             {
                 var polygons = Helpers.SegmentedAutoattackPolygons();
                 var positions = new List<IEnumerable<Vector2>>();
+                var enemies = Player.Instance.CountEnemiesInRange(1200);
 
                 for (var i = 0; i < 4; i++)
                 {
-                    positions.Add(polygons[i].Points.Where(e => e.ToVector3().ExtendPlayerVector().IsPositionSafe() && e.ToVector3().ExtendPlayerVector().Distance(unit) > 150));
+                    positions.Add(
+                        polygons[i].Points.Where(
+                            e =>
+                                e.ToVector3().ExtendPlayerVector().IsPositionSafe() &&
+                                e.ToVector3().ExtendPlayerVector().Distance(unit, true) > (enemies <= 2 ? 150*150 : 300*300)));
                 }
 
-                if (Player.Instance.HealthPercent < 50 && unit.Distance(Player.Instance.ServerPosition) < 600)
+                foreach (var points in positions)
                 {
-                    foreach (
-                        var pos in
-                            positions.Select(position =>
-                                    position.OrderByDescending(index => index.Distance(unit)).FirstOrDefault(x =>
-                                        unit.IsInRange(x.ToVector3().ExtendPlayerVector(),
-                                            Player.Instance.GetAutoAttackRange()) &&
-                                        x.ToVector3().ExtendPlayerVector().IsPositionSafe())
-                                        .ToVector3().ExtendPlayerVector(200)).Where(pos => pos != Vector3.Zero))
+                    if (unit.Distance(Player.Instance.ServerPosition, true) < 425 * 425 && unit.Health > Player.Instance.GetAutoAttackDamage(unit) + (Player.Instance.GetAutoAttackDamage(unit) + Player.Instance.GetAutoAttackDamage(unit) * Helpers.QAdditionalDamage[Q.Level]))
                     {
-                        Q.Cast(pos);
+                        foreach (var point in points.OrderByDescending(index => index.Distance(unit, true)))
+                        {
+                            if (Tumble.BlockQIfEnemyIsOutsideAaRange)
+                            {
+                                var polygon = new Geometry.Polygon.Circle(point.ToVector3().GetTumbleEndPos(),
+                                    Player.Instance.GetAutoAttackRange());
+
+                                if (polygon.IsInside(unit))
+                                {
+                                    Q.Cast(point.To3DWorld().ExtendPlayerVector(250));
+                                }
+                            }
+                            else
+                            {
+                                Q.Cast(point.To3DWorld().ExtendPlayerVector(250));
+                            }
+                        }
                     }
-                    
-                    /*foreach (var position in positions)
+                    else
                     {
-                        var pos =
-                            position.Where(
-                                index =>
-                                    index.ToVector3().ExtendPlayerVector().IsInRange(Player.Instance,
-                                        Player.Instance.GetAutoAttackRange() + 300)).OrderByDescending(by => by.Distance(unit)).FirstOrDefault();
+                        foreach (var point in points.OrderBy(index => index.Distance(unit, true)))
+                        {
+                            if (Tumble.BlockQIfEnemyIsOutsideAaRange)
+                            {
+                                var polygon = new Geometry.Polygon.Circle(point.ToVector3().GetTumbleEndPos(),
+                                    Player.Instance.GetAutoAttackRange());
 
-                        if (pos != Vector2.Zero)
-                        {
-                            Q.Cast(pos.ToVector3().ExtendPlayerVector(200));
+                                if (polygon.IsInside(unit))
+                                {
+                                    Q.Cast(point.To3DWorld().ExtendPlayerVector(250));
+                                }
+                            }
+                            else
+                            {
+                                Q.Cast(point.To3DWorld().ExtendPlayerVector(250));
+                            }
                         }
-                        else
-                        {
-                            Helpers.PrintInfoMessage("Found only Vector2.Zero");
-                        }
-                    }*/
-                }
-                
-                else
-                {
-                    foreach (
-                        var pos in
-                            positions.Select(
-                                position => position.OrderBy(index => index.Distance(unit)).FirstOrDefault(x =>
-                                    unit.IsInRange(x.ToVector3().ExtendPlayerVector(),
-                                        Player.Instance.GetAutoAttackRange()) &&
-                                    x.ToVector3().ExtendPlayerVector().IsPositionSafe())
-                                    .ToVector3().ExtendPlayerVector(200)).Where(pos => pos != Vector3.Zero))
-                    {
-                        Q.Cast(pos);
                     }
-
-                   /* foreach (var position in positions)
-                    {
-                        var pos =
-                            position.Where(
-                                index =>
-                                    index.ToVector3().ExtendPlayerVector().IsInRange(Player.Instance,
-                                        Player.Instance.GetAutoAttackRange() + 300)).OrderBy(by => by.Distance(unit)).FirstOrDefault();
-
-                        if (pos != Vector2.Zero)
-                        {
-                            Q.Cast(pos.ToVector3().ExtendPlayerVector(200));
-                        }
-                        else
-                        {
-                            Helpers.PrintInfoMessage("Found only Vector2.Zero");
-                        }
-                    }*/
                 }
             }
             else
             {
-                if (Game.CursorPos.ExtendPlayerVector().IsPositionSafe())
+                if (Game.CursorPos.GetTumbleEndPos().IsPositionSafe())
                 {
-                    Q.Cast(Game.CursorPos.ExtendPlayerVector(200));
+                    Q.Cast(Game.CursorPos.ExtendPlayerVector(250));
                 }
             }
             Orbwalker.OnPostAttack -= Orbwalker_OnPostAttack;
