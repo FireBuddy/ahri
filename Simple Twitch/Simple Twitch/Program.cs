@@ -70,6 +70,7 @@ namespace Simple_Twitch
         public static int MinEnemiesForR { get { return _combo["MinEnemiesForR"].Cast<Slider>().CurrentValue; } }
 
         public static bool HarassW { get { return _harass["HarassW"].Cast<CheckBox>().CurrentValue; } }
+        public static int HarassManaPercentW { get { return _harass["HarassManaPercentW"].Cast<Slider>().CurrentValue; } }
 
         public static bool LaneClearW { get { return _laneClear["LaneClearW"].Cast<CheckBox>().CurrentValue; } }
         public static int LaneClearManaPercentW { get { return _laneClear["LaneClearManaPercentW"].Cast<Slider>().CurrentValue; } }
@@ -78,8 +79,10 @@ namespace Simple_Twitch
         public static int LaneClearManaPercentE { get { return _laneClear["LaneClearManaPercentE"].Cast<Slider>().CurrentValue; } }
         public static int LaneClearEMin { get { return _laneClear["LaneClearEMin"].Cast<Slider>().CurrentValue; } }
 
+        public static bool JungleClearW { get { return _jungleClear["JungleClear.W"].Cast<CheckBox>().CurrentValue; } }
         public static bool JangleSteal { get { return _jungleClear["JungleSteal"].Cast<CheckBox>().CurrentValue; } }
         public static bool EBaronDrake { get { return _jungleClear["EBaronDrake"].Cast<CheckBox>().CurrentValue; } }
+        
 
         public static bool DrawW { get { return _drawings["Wrange"].Cast<CheckBox>().CurrentValue; } }
         public static bool DrawE { get { return _drawings["Erange"].Cast<CheckBox>().CurrentValue; } }
@@ -424,7 +427,7 @@ namespace Simple_Twitch
                 }
                 case Modes.Harass:
                 {
-                    if (HarassW && ArgsW.IsReady())
+                    if (HarassW && ArgsW.IsReady() && Player.Instance.ManaPercent >= HarassManaPercentW)
                     {
                         var t =
                             EntityManager.Heroes.Enemies.OrderByDescending(a => a.TotalAttackDamage)
@@ -446,7 +449,7 @@ namespace Simple_Twitch
                 }
                 case Modes.JungleClear:
                 {
-                    if (!ArgsW.IsReady())
+                    if (!ArgsW.IsReady() || !JungleClearW)
                         return;
 
                     var minionw = EntityManager.MinionsAndMonsters.GetJungleMonsters(Player.Instance.ServerPosition,
@@ -709,6 +712,7 @@ namespace Simple_Twitch
             _harass = _menu.AddSubMenu("Harass");
             _harass.AddGroupLabel("Harass");
             _harass.Add("HarassW", new CheckBox("Use W"));
+            _harass.Add("HarassManaPercentW", new Slider("Minimal mana percent to use W", 70, 1));
 
             _laneClear = _menu.AddSubMenu("LaneClear");
             _laneClear.AddGroupLabel("LaneClear");
@@ -721,6 +725,7 @@ namespace Simple_Twitch
 
             _jungleClear = _menu.AddSubMenu("JungleClear");
             _jungleClear.AddGroupLabel("JungleClear");
+            _jungleClear.Add("JungleClear.W", new CheckBox("Use W in JungleClear"));
             _jungleClear.Add("JungleSteal", new CheckBox("Steal red / blue with E"));
             _jungleClear.Add("EBaronDrake", new CheckBox("Use E to steal dragon or baron"));
 
