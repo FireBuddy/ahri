@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
@@ -34,16 +34,23 @@ namespace SimpleRyze.Modes
                 Q.AllowedCollisionCount = int.MaxValue;
             }
 
-            if (R.IsReady() && Settings.UseR && wTarget != null && (passiveStacks == 4 || Helpers.IsPassiveCharged))
+            if (R.IsReady() && Settings.UseR && wTarget != null && !Q.IsReady() && !E.IsReady() && !W.IsReady())
+            {
+                R.Cast();
+            }
+            if (R.IsReady() && Settings.UseR && wTarget != null && (passiveStacks == 3 || Helpers.IsPassiveCharged))
             {
                 R.Cast();
             }
 
-            if (wTarget != null && Config.ExtrasMenu.UseWOn(wTarget.BaseSkinName) && W.IsReady() && Settings.UseW)
+            if (wTarget != null && Config.ExtrasMenu.UseWOn(wTarget.BaseSkinName) && W.IsReady() && passiveStacks == 4 && Settings.UseW)
             {
                 W.Cast(wTarget);
             }
-
+            if (wTarget != null && Config.ExtrasMenu.UseWOn(wTarget.BaseSkinName) && W.IsReady() && !Q.IsReady() && !E.IsReady() && !R.IsReady() && Settings.UseW)
+            {
+                W.Cast(wTarget);
+            }
             if (Q.IsReady() && Settings.UseQ && qTarget != null)
             {
                 var qPredictionQ = Q.GetPrediction(qTarget);
@@ -78,7 +85,7 @@ namespace SimpleRyze.Modes
                 }
             }
 
-            if (E.IsReady() && Settings.UseE && wTarget != null && !W.IsReady())
+            if (E.IsReady() && Settings.UseE && wTarget != null)
             {
                 E.Cast(wTarget);
             }
