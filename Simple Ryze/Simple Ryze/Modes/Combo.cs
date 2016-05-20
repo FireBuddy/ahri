@@ -38,18 +38,9 @@ namespace SimpleRyze.Modes
             {
                 R.Cast();
             }
-            if (R.IsReady() && Settings.UseR && wTarget != null && (passiveStacks == 3 || Helpers.IsPassiveCharged))
+            if(R.IsReady() && Settings.UseR && wTarget != null && (passiveStacks == 3 || Helpers.IsPassiveCharged || (passiveStacks == 2 && !Q.IsReady() && !E.IsReady())))
             {
                 R.Cast();
-            }
-
-            if (wTarget != null && Config.ExtrasMenu.UseWOn(wTarget.BaseSkinName) && W.IsReady() && passiveStacks == 4 && Settings.UseW)
-            {
-                W.Cast(wTarget);
-            }
-            if (wTarget != null && Config.ExtrasMenu.UseWOn(wTarget.BaseSkinName) && W.IsReady() && !Q.IsReady() && !E.IsReady() && !R.IsReady() && Settings.UseW)
-            {
-                W.Cast(wTarget);
             }
             if (Q.IsReady() && Settings.UseQ && qTarget != null)
             {
@@ -83,6 +74,14 @@ namespace SimpleRyze.Modes
                         Q.Cast(qPredictionW.CastPosition);
                     }
                 }
+            }
+            if (wTarget != null && Config.ExtrasMenu.UseWOn(wTarget.BaseSkinName) && W.IsReady() && passiveStacks == 4 && Settings.UseW)
+            {
+                W.Cast(wTarget);
+            }
+            if (wTarget != null && Config.ExtrasMenu.UseWOn(wTarget.BaseSkinName) && W.IsReady() && !Q.IsReady() && !E.IsReady() && !R.IsReady() && Settings.UseW)
+            {
+                W.Cast(wTarget);
             }
 
             if (E.IsReady() && Settings.UseE && wTarget != null)
