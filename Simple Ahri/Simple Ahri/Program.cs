@@ -141,7 +141,7 @@ namespace SimpleAhri
             {
                return;
             }
-            if (!Sender.IsDashing() && Sender.Type == GameObjectType.AIHeroClient && Sender.IsValidTarget(Q.Range) && Q.IsReady() && Sender.IsEnemy)
+            if (!Sender.IsDashing() && Sender.Type == GameObjectType.AIHeroClient  && Sender.IsEnemy)
             {
 
             } 
