@@ -138,12 +138,16 @@ namespace SimpleAhri
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
         {
-            if (sender == null)
+            if (Sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
             {
                return;
             }
-            if (!sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient  && sender.IsEnemy)
+            if (!sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(Q.Range) && Q.IsReady() && sender.IsEnemy)
             {
+                
+                {
+                    Q.Cast(sender.ServerPosition);
+                }
 
             } 
         }
