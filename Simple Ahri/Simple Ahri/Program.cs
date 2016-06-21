@@ -142,7 +142,7 @@ namespace SimpleAhri
             {
                return;
             }
-            if (!sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(Q.Range) && Q.IsReady() && sender.IsEnemy)
+            if (!sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(900) && Q.IsReady() && sender.IsEnemy)
             {
                 
                 {
