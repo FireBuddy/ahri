@@ -14,7 +14,7 @@ namespace SimpleAhri.Modes
 
         public override void Execute()
         {
-            if (Settings.UseR && R.IsReady())
+            if (R.IsReady())
             {
                 if (Settings.UseRAfterPlayer && !Player.HasBuff("AhriTumble"))
                     return;
