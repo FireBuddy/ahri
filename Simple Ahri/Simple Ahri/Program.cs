@@ -137,11 +137,11 @@ namespace SimpleAhri
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (Sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
+            if (sender == null)
             {
                return;
             }
-            if (!Sender.IsDashing() && Sender.Type == GameObjectType.AIHeroClient  && Sender.IsEnemy)
+            if (!sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient  && sender.IsEnemy)
             {
 
             } 
