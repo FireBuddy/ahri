@@ -56,6 +56,7 @@ namespace SimpleAhri
             GameObject.OnCreate += GameObject_OnCreate;
             GameObject.OnDelete += GameObject_OnDelete;
             HPBarIndicator.Initalize();
+            Obj_AI_Base.OnBasicAttack += Obj_AI_Base_OnBasicAttack;
 
             if (Config.Drawings.DrawPermashow)
             {
@@ -135,10 +136,26 @@ namespace SimpleAhri
             }
         }
 
+        private static void Obj_AI_Base_OnBasicAttack(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            if (sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
+            {
+               return;
+            }
+            CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
+            if (sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(900) && SpellManager.Q.IsReady() && sender.IsEnemy)
+            {
+                
+                {
+                    SpellManager.Q.Cast(sender.ServerPosition);
+                }
+
+            } 
+        }
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
         {
-            if (sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
+            if (sender == null || (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit)))
             {
                return;
             }
