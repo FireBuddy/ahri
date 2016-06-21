@@ -142,11 +142,11 @@ namespace SimpleAhri
             {
                return;
             }
-            if (!sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(900) && Q.IsReady() && sender.IsEnemy)
+            if (!sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(900) && Spellmanager.Q.IsReady() && sender.IsEnemy)
             {
                 
                 {
-                    Q.Cast(sender.ServerPosition);
+                    Spellmanager.Q.Cast(sender.ServerPosition);
                 }
 
             } 
