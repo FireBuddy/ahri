@@ -14,6 +14,46 @@ namespace SimpleAhri.Modes
 
         public override void Execute()
         {
+            var target = Program.CurrentTarget;
+
+            if (target == null)
+                return;
+
+            if (Config.MiscMenu.UseIgnite && Program.Ignite != null &&
+                Program.Ignite.IsReady() && Program.Ignite.IsInRange(Program.CurrentTarget))
+            {
+                var damage = 50 + (20*Player.Instance.Level);
+
+                if (!Program.CurrentTarget.CanMove &&
+                    Program.CurrentTarget.GetComboDamage() + damage >= Program.CurrentTarget.Health)
+                {
+                    Program.Ignite.Cast(Program.CurrentTarget);
+                }
+            }
+
+            if (Settings.UseQ && Q.IsReady() && target.IsInRange(Player.Instance, Q.Range))
+            {
+                var prediction = Q.GetPrediction(target);
+                if (prediction.HitChancePercent >= 70)
+                {
+                    Q.Cast(prediction.CastPosition);
+                }
+            }
+
+            if (Settings.UseW && W.IsReady() && Player.Instance.IsInRange(target, W.Range-50))
+            {
+                W.Cast();
+            }
+
+            if (Settings.UseE && E.IsReady())
+            {
+                var prediction = E.GetPrediction(target);
+                if (prediction.HitChancePercent >= 80)
+                {
+                    E.Cast(prediction.CastPosition);
+                }
+            }
+            
             if (R.IsReady())
             {
                 if (Settings.UseRAfterPlayer && !Player.HasBuff("AhriTumble"))
@@ -81,45 +121,7 @@ namespace SimpleAhri.Modes
             }
 
 
-            var target = Program.CurrentTarget;
 
-            if (target == null)
-                return;
-
-            if (Config.MiscMenu.UseIgnite && Program.Ignite != null &&
-                Program.Ignite.IsReady() && Program.Ignite.IsInRange(Program.CurrentTarget))
-            {
-                var damage = 50 + (20*Player.Instance.Level);
-
-                if (!Program.CurrentTarget.CanMove &&
-                    Program.CurrentTarget.GetComboDamage() + damage >= Program.CurrentTarget.Health)
-                {
-                    Program.Ignite.Cast(Program.CurrentTarget);
-                }
-            }
-
-            if (Settings.UseQ && Q.IsReady() && target.IsInRange(Player.Instance, Q.Range))
-            {
-                var prediction = Q.GetPrediction(target);
-                if (prediction.HitChancePercent >= 70)
-                {
-                    Q.Cast(prediction.CastPosition);
-                }
-            }
-
-            if (Settings.UseW && W.IsReady() && Player.Instance.IsInRange(target, W.Range-50))
-            {
-                W.Cast();
-            }
-
-            if (Settings.UseE && E.IsReady())
-            {
-                var prediction = E.GetPrediction(target);
-                if (prediction.HitChancePercent >= 80)
-                {
-                    E.Cast(prediction.CastPosition);
-                }
-            }
         }
     }
 }
