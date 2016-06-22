@@ -13,7 +13,7 @@ namespace SimpleAhri
 
         static SpellManager()
         {
-            Q = new Spell.Skillshot(SpellSlot.Q, 880, SkillShotType.Linear, 250, 1500, 125)
+            Q = new Spell.Skillshot(SpellSlot.Q, 900, SkillShotType.Linear, 250, 1500, 125)
             {
                 AllowedCollisionCount = int.MaxValue
             };
