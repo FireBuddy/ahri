@@ -322,6 +322,9 @@ namespace SimpleAhri
             if(!Config.Drawings.Enabled)
                 return;
             
+            if (Config.Drawings.DrawE && SpellManager.Q.IsLearned)
+                Circle.Draw(SpellManager.Q.IsReady() ? SharpDX.Color.Aqua : SharpDX.Color.Red, SpellManager.Q.Range, Config.Drawings.DrawingBorderWidth, Player.Instance.Position);
+            
             if (Config.Drawings.DrawW && SpellManager.W.IsLearned)
                 Circle.Draw(SpellManager.W.IsReady() ? SharpDX.Color.GreenYellow : SharpDX.Color.Red, SpellManager.W.Range, Config.Drawings.DrawingBorderWidth, Player.Instance.Position);
 
