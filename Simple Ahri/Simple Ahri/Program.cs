@@ -141,6 +141,7 @@ namespace SimpleAhri
         {
             if (sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
+               
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
@@ -157,6 +158,7 @@ namespace SimpleAhri
         {
             if (sender == null || (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit)))
             {
+               Chat.Print("none");
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range + 100, DamageType.Magical);
@@ -164,6 +166,7 @@ namespace SimpleAhri
             {
                 
                 {
+                    Chat.Print("cast");
                     SpellManager.Q.Cast(sender.ServerPosition);
                 }
 
