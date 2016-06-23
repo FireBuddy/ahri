@@ -332,14 +332,14 @@ namespace SimpleAhri
             if(!Config.Drawings.Enabled)
                 return;
             
-            if (Config.Drawings.DrawE && SpellManager.Q.IsLearned && SpellManager.Q.IsReady())
+            if (SpellManager.Q.IsLearned && SpellManager.Q.IsReady())
                 Circle.Draw(SharpDX.Color.Aqua, SpellManager.Q.Range, Config.Drawings.DrawingBorderWidth, Player.Instance.Position);
             
-            if (Config.Drawings.DrawW && SpellManager.W.IsLearned)
-                Circle.Draw(SpellManager.W.IsReady() ? SharpDX.Color.GreenYellow : SharpDX.Color.Red, SpellManager.W.Range, Config.Drawings.DrawingBorderWidth, Player.Instance.Position);
+            if (Config.Drawings.DrawW && SpellManager.W.IsLearned && SpellManager.W.IsReady())
+                Circle.Draw(SharpDX.Color.GreenYellow, SpellManager.W.Range, Config.Drawings.DrawingBorderWidth, Player.Instance.Position);
 
-            if (Config.Drawings.DrawE && SpellManager.E.IsLearned)
-                Circle.Draw(SpellManager.E.IsReady() ? SharpDX.Color.DeepPink : SharpDX.Color.Red, SpellManager.E.Range, Config.Drawings.DrawingBorderWidth, Player.Instance.Position);
+            if (Config.Drawings.DrawE && SpellManager.E.IsLearned && SpellManager.E.IsReady())
+                Circle.Draw(SharpDX.Color.DeepPink, SpellManager.E.Range, Config.Drawings.DrawingBorderWidth, Player.Instance.Position);
 
             if (!Config.Drawings.DrawQPosition)
                 return;
