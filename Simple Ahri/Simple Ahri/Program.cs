@@ -147,7 +147,7 @@ namespace SimpleAhri
             {
                 
                 {
-                    SpellManager.Q.Cast(sender.ServerPosition);
+                    
                 }
 
             } 
