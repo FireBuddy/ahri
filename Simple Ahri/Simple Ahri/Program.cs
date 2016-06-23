@@ -52,6 +52,7 @@ namespace SimpleAhri
             Drawing.OnDraw += OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
+            Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
             Game.OnTick += Game_OnTick;
             GameObject.OnCreate += GameObject_OnCreate;
             GameObject.OnDelete += GameObject_OnDelete;
@@ -152,8 +153,7 @@ namespace SimpleAhri
 
             } 
         }
-        private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
-        {
+        private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (sender == null || (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit)))
             {
@@ -169,6 +169,8 @@ namespace SimpleAhri
 
             } 
         }
+        
+        private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (sender.IsMe)
                 return;
@@ -267,7 +269,6 @@ namespace SimpleAhri
                     });
                 }
             }
-        }
         }
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
