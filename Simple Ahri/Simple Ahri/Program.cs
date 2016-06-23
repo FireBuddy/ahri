@@ -149,14 +149,14 @@ namespace SimpleAhri
             {
                 
                 {
-                    
+                   SpellManager.Q.Cast(sender.ServerPosition); 
                 }
 
             } 
         }
         private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (sender == null || (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass)))
+            if (sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
                Chat.Print("none");
                return;
