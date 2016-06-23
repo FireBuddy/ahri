@@ -139,7 +139,7 @@ namespace SimpleAhri
 
         private static void Obj_AI_Base_OnBasicAttack(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
+            if (sender == null && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
                
                return;
@@ -149,24 +149,24 @@ namespace SimpleAhri
             {
                 
                 {
-                   SpellManager.Q.Cast(sender.ServerPosition); 
+                  
                 }
 
             } 
         }
         private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
+            if (sender == null && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
-               Chat.Print("none");
+               
                return;
             }
-            CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range + 100, DamageType.Magical);
-            if (!sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range + 100) && SpellManager.Q.IsReady() && sender.IsEnemy)
+            CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
+            if (!sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
             {
                 
                 {
-                    Chat.Print("cast");
+                
                     SpellManager.Q.Cast(sender.ServerPosition);
                 }
 
