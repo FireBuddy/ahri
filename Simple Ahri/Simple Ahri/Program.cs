@@ -151,7 +151,7 @@ namespace SimpleAhri
             var Minions = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy, Player.Instance.Position, 50);
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
             {
-                 SpellManager.Q.SourceObject = MyHero;
+                 Q.SourceObject = MyHero;
                 {
                   SpellManager.Q.Cast(sender.ServerPosition);
                 }
