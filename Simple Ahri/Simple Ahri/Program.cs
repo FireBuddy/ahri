@@ -8,6 +8,8 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
+using EloBuddy.SDK.Menu;
+using EloBuddy.SDK.Menu.Values;
 using SharpDX;
 using Color = System.Drawing.Color;
 
@@ -30,6 +32,8 @@ namespace SimpleAhri
         public static Item Rabadon;
 
         public static Spell.Targeted Ignite;
+        
+        public Obj_AI_Minion RShadow;
 
         public static MissileClient QOrbMissile, QReturnMissile;
 
