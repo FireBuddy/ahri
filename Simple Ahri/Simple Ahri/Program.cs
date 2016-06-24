@@ -8,6 +8,8 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
+using Elobuddy.SDK.Menu;
+using Elobuddy.SDK.Menu.Values;
 using SharpDX;
 using Color = System.Drawing.Color;
 
