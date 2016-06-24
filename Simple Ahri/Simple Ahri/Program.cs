@@ -33,7 +33,7 @@ namespace SimpleAhri
 
         public static Spell.Targeted Ignite;
         
-        public static Obj_AI_Minion RShadow;
+        public static Obj_AI_Minion Minion;
 
         public static MissileClient QOrbMissile, QReturnMissile;
 
