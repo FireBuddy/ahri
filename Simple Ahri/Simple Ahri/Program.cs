@@ -148,7 +148,7 @@ namespace SimpleAhri
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            var Minions = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy, sender.ServerPosition, 200);
+            var Minions = EntityManager.MinionsAndMonsters.GetLaneMinions(sender.ServerPosition, 200);
             foreach (var Minion in Minions)
             if (sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
             {
