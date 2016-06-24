@@ -148,9 +148,9 @@ namespace SimpleAhri
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            var Minions = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy, sender.ServerPosition, 100);
+            var Minions = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy, sender.ServerPosition, 200);
             foreach (var Minion in Minions)
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
+            if (sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
             {
                 
                 {
