@@ -162,7 +162,7 @@ namespace SimpleAhri
             {
                 
                 {
-                  SpellManager.Q.Cast(sender.ServerPosition);
+                  SpellManager.Q.Cast(sender.ServerPosition - Minion.Distance(sender.Position));
                 }
 
             } 
