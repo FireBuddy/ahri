@@ -150,7 +150,7 @@ namespace SimpleAhri
             foreach (var Minion in Minions)
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
             {
-                SpellManager.Q.SourceObject = XMinion; 
+                
                 {
                   SpellManager.Q.Cast(sender.ServerPosition);
                 }
