@@ -18,7 +18,7 @@ namespace SimpleAhri
     public static class Program
     {
         public const string ChampName = "Ahri";
-
+        public Obj_AI_Minion Minion;
         public static AIHeroClient CurrentTarget;
 
         public static readonly List<ProcessSpellCastCache> CachedAntiGapclosers = new List<ProcessSpellCastCache>();
