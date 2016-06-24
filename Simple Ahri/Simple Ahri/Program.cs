@@ -18,7 +18,7 @@ namespace SimpleAhri
     public static class Program
     {
         public const string ChampName = "Ahri";
-        public Obj_AI_Minion Minion;
+        public Obj_AI_Minion XMinion;
         public static AIHeroClient CurrentTarget;
 
         public static readonly List<ProcessSpellCastCache> CachedAntiGapclosers = new List<ProcessSpellCastCache>();
@@ -150,7 +150,7 @@ namespace SimpleAhri
             foreach (var Minion in Minions)
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
             {
-                SpellManager.Q.SourceObject = Minion; 
+                SpellManager.Q.SourceObject = XMinion; 
                 {
                   SpellManager.Q.Cast(sender.ServerPosition);
                 }
