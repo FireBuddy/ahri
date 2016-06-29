@@ -99,7 +99,7 @@ namespace SimpleAhri
             Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
             if (Flash.IsReady())
             {
-            var target = TargetSelector.GetTarget(EFlash.Range + 100, DamageType.Magical);
+            var target = TargetSelector.GetTarget(SpellManager.EFlash.Range + 100, DamageType.Magical);
                 //var target = TargetSelector.SelectedTarget;
                 
             }
