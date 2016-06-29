@@ -143,27 +143,17 @@ namespace SimpleAhri
 
         private static void Obj_AI_Base_OnBasicAttack(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (sender == null)
+            if (sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            var Minions = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Both,sender.ServerPosition, 60);
-            foreach (var Minion in Minions)
             if (sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
             {
                 
                 {
-                  SpellManager.Q.Cast(sender.ServerPosition - Minion.Distance(sender.Position));
-                }
-
-            }
-            foreach (var Minion in Minions)
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit) && sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
-            {
                 
-                {
-                  SpellManager.Q.Cast(sender.ServerPosition - Minion.Distance(sender.Position));
+                    SpellManager.Q.Cast(sender.ServerPosition);
                 }
 
             } 
@@ -175,7 +165,7 @@ namespace SimpleAhri
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            if (sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
+            if (args.Target != CurrentTarget && sender == CurrentTarget && !sender.IsDashing() && sender.Type == GameObjectType.AIHeroClient && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.IsEnemy)
             {
                 
                 {
