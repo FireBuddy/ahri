@@ -96,7 +96,7 @@ namespace SimpleAhri
         
         private static void Game_OnGameUpdate(EventArgs args)
         {
-           if (Configs.Combo.UseRAfterPlayer)
+           if (Configs.Modes.UseRAfterPlayer)
             {
               
             }
