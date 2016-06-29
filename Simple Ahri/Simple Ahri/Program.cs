@@ -103,6 +103,9 @@ namespace SimpleAhri
                 //var target = TargetSelector.SelectedTarget;
             if (target.IsValidTarget() && !target.IsInvulnerable)
             {
+                var pre = EFlash.GetPrediction(target);
+                var postion = EloBuddy.Player.Instance.ServerPosition.Extend(target.ServerPosition, Flash.Range);
+                int Delay = SpellManager.E.CastDelay + Game.Ping - 60;
                 
             }    
             }
