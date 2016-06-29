@@ -659,6 +659,7 @@ namespace SimpleAhri
                     ModesMenu.Add("Combo.R", new CheckBox("Use R"));
                     ModesMenu.Add("Combo.RDive", new KeyBind("Use R to dive", false, KeyBind.BindTypes.PressToggle, 'H'));
                     ModesMenu.Add("Combo.ROnlyAfterPlayer", new CheckBox("Use R only if you used it before"));
+                    ModesMenu.Add("Combo EFlash", new KeyBind("Use E + Flash", false, KeyBind.BindTypes.HoldActive, 'Z'));
                 }
 
                 public static void InitializeCombo()
