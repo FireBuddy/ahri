@@ -92,10 +92,7 @@ namespace SimpleAhri
 
             Helpers.PrintInfoMessage("Addon loaded !");
         }
-        private static void Game_OnTick(EventArgs args)
-        {    
 
-        }
         
         private static void CastEFlash()
         {
