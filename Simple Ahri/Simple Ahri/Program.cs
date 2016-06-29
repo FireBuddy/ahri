@@ -98,7 +98,7 @@ namespace SimpleAhri
         {
             if (Player.IsDead) return;
 
-            if (GetKeyBind(ModesMenu, "Combo EFlash"))
+            if (GetKeyBind(Combo(), "Combo EFlash"))
                 CastEFlash();
         }
 
