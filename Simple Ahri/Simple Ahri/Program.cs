@@ -54,7 +54,6 @@ namespace SimpleAhri
             Config.Initialize();
             SpellManager.Initialize();
             ModeManager.Initialize();
-
             Drawing.OnDraw += OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
@@ -94,7 +93,7 @@ namespace SimpleAhri
             Helpers.PrintInfoMessage("Addon loaded !");
         }
         private static void Game_OnTick(EventArgs args)
-        {    if (GetKeyBind(Config.Combo.ModesMenu, "Combo EFlash"))
+        {    if (GetKeyBind(ModesMenu, "Combo EFlash"))
                { 
                 CastEFlash();
                }
