@@ -52,10 +52,7 @@ namespace SimpleAhri.Modes
                 {
                     E.Cast(prediction.CastPosition);
                 }
-                if (prediction.HitChancePercent >= 80 && NavMesh.IsWallOfGrass(Player.Instance.Position, 5))
-                {
-                    E.Cast(prediction.CastPosition);
-                }
+
             }
             
             if (R.IsReady())
