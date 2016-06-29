@@ -94,7 +94,7 @@ namespace SimpleAhri
             Helpers.PrintInfoMessage("Addon loaded !");
         }
         private static void Game_OnTick(EventArgs args)
-        {    if (GetKeyBind(Config.ModesMenu, "Combo EFlash"))
+        {    if (GetKeyBind(Config.Combo.ModesMenu, "Combo EFlash"))
                { 
                 CastEFlash();
                }
