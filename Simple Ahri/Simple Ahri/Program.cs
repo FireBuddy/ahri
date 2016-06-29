@@ -76,7 +76,11 @@ namespace SimpleAhri
             {
                 Ignite = new Spell.Targeted(ignite.Slot, 600);
             }
-
+            var flash_slot = Player.GetSpellSlotFromName("summonerflash");
+            if (flash_slot != SpellSlot.Unknown)
+            {
+            Flash = new Spell.Targeted(flash_slot, 425);
+            }
             if (Config.MiscMenu.SkinHackEnabled)
             {
                 Player.SetSkin(Player.Instance.BaseSkinName, Config.MiscMenu.SkinId);
