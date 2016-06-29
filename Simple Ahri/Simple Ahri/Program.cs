@@ -33,6 +33,8 @@ namespace SimpleAhri
 
         public static Spell.Targeted Ignite;
         
+        public static Spell.Targeted Flash;
+        
         public static Obj_AI_Minion Minion;
 
         public static MissileClient QOrbMissile, QReturnMissile;
@@ -75,6 +77,11 @@ namespace SimpleAhri
             if (ignite != null)
             {
                 Ignite = new Spell.Targeted(ignite.Slot, 600);
+            }
+            var flash = Player.Spells.FirstOrDefault(s => s.Name.ToLower().Contains("summonerflash"));
+            if (flash != null)
+            {
+                Flash = new Spell.Targeted(flash.Slot, 600);
             }
 
             if (Config.MiscMenu.SkinHackEnabled)
