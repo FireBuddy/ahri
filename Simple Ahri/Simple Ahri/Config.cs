@@ -649,6 +649,7 @@ namespace SimpleAhri
                 public static bool UseR => ModesMenu["Combo.R"].Cast<CheckBox>().CurrentValue;
                 public static bool UseRToDive => ModesMenu["Combo.RDive"].Cast<KeyBind>().CurrentValue;
                 public static bool UseRAfterPlayer => ModesMenu["Combo.ROnlyAfterPlayer"].Cast<CheckBox>().CurrentValue;
+                public static bool UseEFlash => ModesMenu["Combo EFlash"].Cast<KeyBind>().CurrentValue;
 
                 static Combo()
                 {
