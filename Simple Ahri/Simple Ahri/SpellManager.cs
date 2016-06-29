@@ -6,6 +6,7 @@ namespace SimpleAhri
 {
     public static class SpellManager
     {
+        public static Spell.Skillshot EFlash { get; private set; }
         public static Spell.Skillshot Q { get; private set; }
         public static Spell.Active W { get; private set; }
         public static Spell.Skillshot E { get; private set; }
@@ -13,6 +14,10 @@ namespace SimpleAhri
 
         static SpellManager()
         {
+            EFlash = new Spell.Skillshot(SpellSlot.E, 1350, SkillShotType.Linear, 250, 1500, 100)
+            {
+                AllowedCollisionCount = 0
+            };
             Q = new Spell.Skillshot(SpellSlot.Q, 900, SkillShotType.Linear, 250, 1500, 125)
             {
                 AllowedCollisionCount = int.MaxValue
