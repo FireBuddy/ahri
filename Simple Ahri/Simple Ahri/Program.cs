@@ -99,21 +99,8 @@ namespace SimpleAhri
             Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
             if (Flash.IsReady())
             {
-                var target = TargetSelector.GetTarget(1450, DamageType.Magical);
-                //var target = TargetSelector.SelectedTarget;
-                if (target.IsValidTarget() && !target.IsInvulnerable)
-                {
-                    var pre = SpellManager.EFlash.GetPrediction(target);
-                    var postion = Player.Instance.ServerPosition.Extend(target.ServerPosition, Flash.Range);
-                    int Delay = 250 + Game.Ping - 60;
 
-                    if (E.IsReady() && pre.HitChance >= HitChance.High)
-                        if (SpellManager.EFlash.Cast(pre.CastPosition))
-                            Core.DelayAction(delegate ()
-                            {
-                                Flash.Cast(postion.To3DWorld());
-                            }, new Random(DateTime.Now.Millisecond * (int)(Game.CursorPos.X + Player.Instance.ServerPosition.Y)).Next(Delay, Delay + 30));
-                }
+                
             }
         }
         private static void Drawing_OnEndScene(EventArgs args)
