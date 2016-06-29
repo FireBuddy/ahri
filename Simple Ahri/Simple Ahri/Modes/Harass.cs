@@ -17,7 +17,7 @@ namespace SimpleAhri.Modes
             if (target == null)
                 return;
 
-            if (Q.IsReady() && Settings.UseQ && Player.Instance.ManaPercent >= Settings.QMana && target.IsInRange(Player.Instance, Q.Range - 100))
+            if (Q.IsReady() && (Settings.UseQ || !target.CanMove) && Player.Instance.ManaPercent >= Settings.QMana && target.IsInRange(Player.Instance, Q.Range - 100))
             {
                 var prediction = Q.GetPrediction(target);
 
