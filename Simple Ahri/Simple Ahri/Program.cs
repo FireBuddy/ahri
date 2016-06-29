@@ -59,6 +59,7 @@ namespace SimpleAhri
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
             Game.OnTick += Game_OnTick;
+            Game.OnUpdate += Game_OnGameUpdate;
             GameObject.OnCreate += GameObject_OnCreate;
             GameObject.OnDelete += GameObject_OnDelete;
             HPBarIndicator.Initalize();
@@ -92,6 +93,15 @@ namespace SimpleAhri
 
             Helpers.PrintInfoMessage("Addon loaded !");
         }
+        
+            private static void Game_OnGameUpdate(EventArgs args)
+        {
+            if (Player.IsDead) return;
+
+            if (GetKeyBind(ModesMenu, "Combo EFlash"))
+                CastEFlash();
+        }
+
 
         
         private static void CastEFlash()
