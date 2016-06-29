@@ -99,13 +99,13 @@ namespace SimpleAhri
             EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
             if (Flash.IsReady())
             {
-                var target = TargetSelector.GetTarget(SpellManager.EFlash.Range + 100, DamageType.Magical);
+                var target = TargetSelector.GetTarget(1450, DamageType.Magical);
                 //var target = TargetSelector.SelectedTarget;
                 if (target.IsValidTarget() && !target.IsInvulnerable)
                 {
                     var pre = SpellManager.EFlash.GetPrediction(target);
                     var postion = EloBuddy.Player.Instance.ServerPosition.Extend(target.ServerPosition, Flash.Range);
-                    int Delay = SpellManager.E.CastDelay + Game.Ping - 60;
+                    int Delay = 250 + Game.Ping - 60;
 
                     if (E.IsReady() && pre.HitChance >= HitChance.High)
                         if (SpellManager.EFlash.Cast(pre.CastPosition))
