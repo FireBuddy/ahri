@@ -109,7 +109,7 @@ namespace SimpleAhri
                     
                         if (SpellManager.E.IsReady() && pre.HitChance >= HitChance.High)
                             if (SpellManager.EFlash.Cast(pre.CastPosition))
-                                Core.DelayAction(delegate { }, 100); 
+                                Core.DelayAction(delegate { Flash.Cast(postion.To3DWorld()); }, 100); 
                     
                 }    
             }
