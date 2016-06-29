@@ -96,8 +96,10 @@ namespace SimpleAhri
         
         private static void Game_OnGameUpdate(EventArgs args)
         {
-           if (GetKeyBind( ModesMenu, "Combo EFlash"))
-            CastEFlash();
+           if (GetKeyBind( Combo, "Combo EFlash"))
+            {
+              
+            }
 
         }
 
