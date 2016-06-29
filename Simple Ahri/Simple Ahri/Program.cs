@@ -109,9 +109,10 @@ namespace SimpleAhri
                     
                         if (SpellManager.E.IsReady() && pre.HitChance >= HitChance.High)
                             if (SpellManager.EFlash.Cast(pre.CastPosition))
+                               
                                 {
-                                
-                                }
+                                    Flash.Cast(postion.To3DWorld());
+                                } 
                     
                 }    
             }
