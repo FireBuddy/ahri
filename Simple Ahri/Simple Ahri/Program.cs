@@ -94,12 +94,11 @@ namespace SimpleAhri
             Helpers.PrintInfoMessage("Addon loaded !");
         }
         
-            private static void Game_OnGameUpdate(EventArgs args)
+        private static void Game_OnGameUpdate(EventArgs args)
         {
             if (Player.IsDead) return;
 
-            if (GetKeyBind(Combo, "Combo EFlash"))
-                CastEFlash();
+
         }
 
 
