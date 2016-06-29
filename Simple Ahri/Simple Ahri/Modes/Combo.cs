@@ -16,7 +16,7 @@ namespace SimpleAhri.Modes
         {
             var target = Program.CurrentTarget;
 
-            if (target == null)
+            if (target == null || target.HasUndyingBuff())
                 return;
 
             if (Config.MiscMenu.UseIgnite && Program.Ignite != null &&
