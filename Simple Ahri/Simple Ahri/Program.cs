@@ -98,7 +98,7 @@ namespace SimpleAhri
         {
            if (Config.Modes.Combo.UseEFlash)
             {
-              
+            CastEFlash();
             }
 
         }
