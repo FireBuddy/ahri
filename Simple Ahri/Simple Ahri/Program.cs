@@ -96,7 +96,7 @@ namespace SimpleAhri
 
         private static void CastEFlash()
         {
-            EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
+            Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
             if (Flash.IsReady())
             {
                 var target = TargetSelector.GetTarget(1450, DamageType.Magical);
@@ -104,7 +104,7 @@ namespace SimpleAhri
                 if (target.IsValidTarget() && !target.IsInvulnerable)
                 {
                     var pre = SpellManager.EFlash.GetPrediction(target);
-                    var postion = EloBuddy.Player.Instance.ServerPosition.Extend(target.ServerPosition, Flash.Range);
+                    var postion = Player.Instance.ServerPosition.Extend(target.ServerPosition, Flash.Range);
                     int Delay = 250 + Game.Ping - 60;
 
                     if (E.IsReady() && pre.HitChance >= HitChance.High)
@@ -112,7 +112,7 @@ namespace SimpleAhri
                             Core.DelayAction(delegate ()
                             {
                                 Flash.Cast(postion.To3DWorld());
-                            }, new Random(DateTime.Now.Millisecond * (int)(Game.CursorPos.X + Player.Position.Y)).Next(Delay, Delay + 30));
+                            }, new Random(DateTime.Now.Millisecond * (int)(Game.CursorPos.X + Player.Instance.ServerPosition.Y)).Next(Delay, Delay + 30));
                 }
             }
         }
