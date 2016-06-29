@@ -101,7 +101,10 @@ namespace SimpleAhri
             {
             var target = TargetSelector.GetTarget(SpellManager.EFlash.Range + 100, DamageType.Magical);
                 //var target = TargetSelector.SelectedTarget;
+            if (target.IsValidTarget() && !target.IsInvulnerable)
+            {
                 
+            }    
             }
         }
         private static void Drawing_OnEndScene(EventArgs args)
