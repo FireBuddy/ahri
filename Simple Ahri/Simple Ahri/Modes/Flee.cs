@@ -18,7 +18,7 @@ namespace SimpleAhri.Modes
                 Q.Cast(target);
             }
             
-             if (!target.IsInRange(Player.Instance, Q.Range + 300) && Q.IsReady() && Config.Modes.Flee.UseQ)
+            if (!target.IsInRange(Player.Instance, Q.Range + 300) && Q.IsReady() && Config.Modes.Flee.UseQ)
             {
                 Q.Cast(Player.Instance.Position.Extend(Game.CursorPos, -300).To3D());
             }
