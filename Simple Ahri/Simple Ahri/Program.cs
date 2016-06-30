@@ -81,7 +81,7 @@ namespace SimpleAhri
             var flash = Player.Spells.FirstOrDefault(s => s.Name.ToLower().Contains("summonerflash"));
             if (flash != null)
             {
-                Flash = new Spell.Targeted(flash.Slot, 600);
+                Flash = new Spell.Targeted(flash.Slot, 425);
             }
 
             if (Config.MiscMenu.SkinHackEnabled)
