@@ -207,7 +207,7 @@ namespace SimpleAhri
             {
                 
                 {
-                
+                     Chat.Print(args.SData.Name);
                     SpellManager.Q.Cast(sender.ServerPosition);
                 }
 
