@@ -12,7 +12,13 @@ namespace SimpleAhri.Modes
 
         public override void Execute()
         {
-            if (Q.IsReady() && Config.Modes.Flee.UseQ)
+            var target = Program.CurrentTarget;
+            if (Q.IsReady() && Config.Modes.Flee.UseQ && target.IsInRange(Player.Instance, Q.Range + 150))
+            {
+                Q.Cast(target);
+            }
+            
+            else if (Q.IsReady() && Config.Modes.Flee.UseQ)
             {
                 Q.Cast(Player.Instance.Position.Extend(Game.CursorPos, -300).To3D());
             }
