@@ -18,6 +18,8 @@ namespace SimpleAhri.Modes
                 var target = Program.CurrentTarget;
                 if (Q.IsReady() && Config.Modes.Flee.UseQ && target.IsInRange(Player.Instance, Q.Range + 300))
                 Q.Cast(target);
+                if (E.IsReady() && Config.Modes.Flee.UseQ && target.IsInRange(Player.Instance, Q.Range + 300))
+                E.Cast(target);
             }
             
             
