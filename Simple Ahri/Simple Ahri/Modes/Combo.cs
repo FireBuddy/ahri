@@ -31,7 +31,7 @@ namespace SimpleAhri.Modes
                 }
             }
 
-            if (Settings.UseQ && Q.IsReady() && target.IsInRange(Player.Instance, Q.Range))
+            if (Settings.UseQ && Q.IsReady() && target.IsInRange(Player.Instance, Q.Range) && !target.HasSpellShield())
             {
                 var prediction = Q.GetPrediction(target);
                 if (prediction.HitChancePercent >= 70)
