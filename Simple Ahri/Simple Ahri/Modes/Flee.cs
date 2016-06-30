@@ -22,10 +22,7 @@ namespace SimpleAhri.Modes
             
             
             
-            if (Q.IsReady() && Config.Modes.Flee.UseQ)
-            {
-                Q.Cast(Player.Instance.Position.Extend(Game.CursorPos, -300).To3D());
-            }
+
             
         }
     }
