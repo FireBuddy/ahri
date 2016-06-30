@@ -186,7 +186,7 @@ namespace SimpleAhri
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            if (sender == CurrentTarget && !sender.IsDashing()  && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() &&  !sender.HasSpellShield())
+            if (sender == CurrentTarget && !sender.IsDashing()  && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady() && sender.HasSpellShield())
             {
                 
                 {
