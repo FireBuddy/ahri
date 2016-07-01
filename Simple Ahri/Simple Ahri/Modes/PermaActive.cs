@@ -106,16 +106,16 @@ namespace SimpleAhri.Modes
             
             if (Config.AutoHarass.Enabled && Config.AutoHarass.UseQ && Q.IsReady() && Player.Instance.Position.CountEnemiesInRange(Q.Range - 250) >= 1 && Player.Instance.ManaPercent >= Config.AutoHarass.QMana)
             {
-                foreach (var enemy in EntityManager.Heroes.Enemies.Where(hero => hero.IsValidTarget(Q.Range - 250) && !hero.IsZombie && Config.AutoHarass.IsQEnabledFor(hero.BaseSkinName)).OrderByDescending(TargetSelector.GetPriority).ThenByDescending(hero => Q.GetPrediction(hero).HitChancePercent))
-                {
-                    var time = Player.Instance.ServerPosition.Distance(enemy) / 1000;
-                    var prediction = Prediction.Position.PredictUnitPosition(enemy, 200 + Game.Ping / 2 + (int)time * 1000);
-
-                    if (prediction.IsInRange(Player.Instance, Q.Range - 250))
-                    {
-                        Q.Cast(prediction.To3D());
-                    }
-                }
+    //            foreach (var enemy in EntityManager.Heroes.Enemies.Where(hero => hero.IsValidTarget(Q.Range - 250) && !hero.IsZombie && Config.AutoHarass.IsQEnabledFor(hero.BaseSkinName)).OrderByDescending(TargetSelector.GetPriority).ThenByDescending(hero => Q.GetPrediction(hero).HitChancePercent))
+      //          {
+      //              var time = Player.Instance.ServerPosition.Distance(enemy) / 1000;
+        //            var prediction = Prediction.Position.PredictUnitPosition(enemy, 200 + Game.Ping / 2 + (int)time * 1000);
+//
+         //           if (prediction.IsInRange(Player.Instance, Q.Range - 250))
+         //           {
+         //               Q.Cast(prediction.To3D());
+          //          }
+        //        }
             }
 
             if (Config.MiscMenu.UseIgnite && Program.CurrentTarget != null && Program.Ignite != null && Program.Ignite.IsReady() && Program.Ignite.IsInRange(Program.CurrentTarget))
