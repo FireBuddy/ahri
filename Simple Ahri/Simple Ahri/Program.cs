@@ -186,7 +186,7 @@ namespace SimpleAhri
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            if (sender.IsValidTarget(SpellManager.Q.Range) && !sender.IsInvulnerable && sender == CurrentTarget && !sender.IsDashing()  && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady())
+            if (!sender.IsInvulnerable && sender == CurrentTarget && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady())
             {
                 
                 {
@@ -204,7 +204,7 @@ namespace SimpleAhri
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            if (sender.IsValidTarget(SpellManager.Q.Range) && !sender.IsInvulnerable && args.Target != CurrentTarget && !sender.IsDashing() && sender == CurrentTarget && !sender.IsDashing() && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady())
+            if (SpellManager.Q.IsReady() && sender.IsValidTarget(SpellManager.Q.Range) && !sender.IsInvulnerable && args.Target != CurrentTarget && !sender.IsDashing() && sender == CurrentTarget && !sender.IsDashing())
             {
                 
                 if (args.End.Distance(Player.Instance.Position) <= 100)
@@ -213,7 +213,7 @@ namespace SimpleAhri
 
 
                  }
-                if (args.End.Distance(Player.Instance.Position) >= 100 && args.SData.Name == "RenektonSliceAndDice")
+                if (args.End.Distance(Player.Instance.Position) >= 100)
                 {
 
                     Chat.Print("Not Receiving damage" +args.SData.Name);
@@ -223,7 +223,7 @@ namespace SimpleAhri
                 if (args.Target != null)
                 {
                     Chat.Print("targetspell"+args.SData.Name);
-                   // SpellManager.Q.Cast(sender);
+                    SpellManager.Q.Cast(sender);
 
                 }
 
