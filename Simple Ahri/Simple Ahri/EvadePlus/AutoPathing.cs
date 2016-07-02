@@ -9,7 +9,7 @@ using EloBuddy.SDK.Menu.Values;
 using SharpDX;
 using Color = System.Drawing.Color;
 
-namespace YasuoBuddy.EvadePlus
+namespace SimpleAhri.EvadePlus
 {
     public static class AutoPathing
     {
