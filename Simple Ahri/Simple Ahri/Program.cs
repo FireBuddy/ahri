@@ -191,7 +191,7 @@ namespace SimpleAhri
                 
                 {
                     Chat.Print("basic Attack");
-                    SpellManager.Q.Cast(sender.ServerPosition);
+                    SpellManager.Q.Cast(sender);
                 }
 
             } 
