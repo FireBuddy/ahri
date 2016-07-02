@@ -6,7 +6,7 @@ using EloBuddy.SDK.Rendering;
 using SharpDX;
 using Color = System.Drawing.Color;
 
-namespace YasuoBuddy.EvadePlus.SkillshotTypes
+namespace SimpleAhri.EvadePlus.SkillshotTypes
 {
     public class CircularMissileSkillshot : EvadeSkillshot
     {
