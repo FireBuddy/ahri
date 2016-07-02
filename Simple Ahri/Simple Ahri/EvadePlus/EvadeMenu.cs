@@ -3,9 +3,9 @@ using System.Linq;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
-using YasuoBuddy.EvadePlus.SkillshotTypes;
+using SimpleAhri.EvadePlus.SkillshotTypes;
 
-namespace YasuoBuddy.EvadePlus
+namespace SimpleAhri.EvadePlus
 {
     internal class EvadeMenu
     {
