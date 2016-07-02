@@ -217,14 +217,14 @@ namespace SimpleAhri
                 {
                     Chat.Print(args.SData.Name);
                     Chat.Print("Not Receiving damage");
-                    SpellManager.Q.Cast(sender.ServerPosition);
+                    SpellManager.Q.Cast(sender);
 
                 }                
                 if (args.Target != null)
                 {
                     Chat.Print(args.SData.Name);
                     Chat.Print("targetspell");
-                    SpellManager.Q.Cast(sender.ServerPosition);
+                    SpellManager.Q.Cast(sender);
 
                 }
 
