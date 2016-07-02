@@ -218,7 +218,7 @@ namespace SimpleAhri
                     SpellManager.Q.Cast(sender.ServerPosition);
 
                 }                
-                if (args.Target != null))
+                if (args.Target != null)
                 {
                     Chat.Print("targetspell");
                     SpellManager.Q.Cast(sender.ServerPosition);
