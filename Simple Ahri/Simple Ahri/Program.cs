@@ -209,14 +209,14 @@ namespace SimpleAhri
                 
                 if (args.End.Distance(Player.Instance.Position) <= 100)
                 {
-                   Chat.Print("Receiving damage");
-                   Chat.Print(args.SData.Name);
+                   Chat.Print("Receiving damage",args.SData.Name);
+
 
                  }
                 if (args.End.Distance(Player.Instance.Position) >= 100 && args.SData.Name == "LucianE")
                 {
-                    Chat.Print(args.SData.Name);
-                    Chat.Print("Not Receiving damage");
+
+                    Chat.Print("Not Receiving damage",args.SData.Name);
                     SpellManager.Q.Cast(sender);
 
                 }                
