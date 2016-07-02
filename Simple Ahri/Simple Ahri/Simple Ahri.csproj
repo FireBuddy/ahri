@@ -57,7 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EvadePlus\AutoPathing.cs" />
+    <Compile Include="EvadePlus\EvadeMenu.cs" />
+    <Compile Include="EvadePlus\SkillshotTypes\CircularMissileSkillshot.cs" />
+    <Compile Include="EvadePlus\SkillshotTypes\LinearMissileSkillshot.cs" />
+    <Compile Include="EvadePlus\SkillshotTypes\SpecialTypes\SummonerMark.cs" />
     <Compile Include="PermaShow.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Damages.cs" />
