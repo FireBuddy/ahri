@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EvadePlus\AutoPathing.cs" />
     <Compile Include="PermaShow.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Damages.cs" />
