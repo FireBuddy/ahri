@@ -57,18 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EvadePlus\AutoPathing.cs" />
-    <Compile Include="EvadePlus\EvadeMenu.cs" />
-    <Compile Include="EvadePlus\EvadePlus.cs" />
-    <Compile Include="EvadePlus\EvadeSkillshot.cs" />
-    <Compile Include="EvadePlus\EvadeSpellManager.cs" />
-    <Compile Include="EvadePlus\Program.cs" />
-    <Compile Include="EvadePlus\SkillshotDatabase.cs" />
-    <Compile Include="EvadePlus\SkillshotDetector.cs" />
-    <Compile Include="EvadePlus\SkillshotTypes\CircularMissileSkillshot.cs" />
-    <Compile Include="EvadePlus\SkillshotTypes\LinearMissileSkillshot.cs" />
-    <Compile Include="EvadePlus\SkillshotTypes\SpecialTypes\SummonerMark.cs" />
-    <Compile Include="EvadePlus\SpellData.cs" />
-    <Compile Include="EvadePlus\Utils.cs" />
     <Compile Include="PermaShow.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Damages.cs" />
