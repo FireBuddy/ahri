@@ -4,7 +4,7 @@ using EloBuddy.SDK;
 using SharpDX;
 using Color = System.Drawing.Color;
 
-namespace YasuoBuddy.EvadePlus.SkillshotTypes.SpecialTypes
+namespace SimpleAhri.EvadePlus.SkillshotTypes.SpecialTypes
 {
     public class SummonerMark : EvadeSkillshot
     {
