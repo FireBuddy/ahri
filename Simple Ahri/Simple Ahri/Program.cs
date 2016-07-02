@@ -203,12 +203,17 @@ namespace SimpleAhri
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            if (args.SData.CastRange <= 100 && args.Target != CurrentTarget && !sender.IsDashing() && sender == CurrentTarget && !sender.IsDashing() && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady())
+            if (args.Target != CurrentTarget && !sender.IsDashing() && sender == CurrentTarget && !sender.IsDashing() && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady())
             {
                 
                 {
-                     Chat.Print(args.SData.Name);
+                    Chat.Print(args.SData.Name);
                     SpellManager.Q.Cast(sender.ServerPosition);
+                }
+                if (Args.End.Distance(Player.Instance.Position) <= Args.SData.LineWidth)
+                {
+                    Chat.Print("Receiving damage");
+
                 }
 
             } 
