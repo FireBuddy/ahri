@@ -222,8 +222,7 @@ namespace SimpleAhri
                 }                
                 if (args.Target != null)
                 {
-                    Chat.Print(args.SData.Name);
-                    Chat.Print("targetspell");
+                    Chat.Print("targetspell" args.SData.Name);
                    // SpellManager.Q.Cast(sender);
 
                 }
