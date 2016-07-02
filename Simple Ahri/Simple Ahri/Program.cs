@@ -186,7 +186,7 @@ namespace SimpleAhri
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            if (sender == CurrentTarget && !sender.IsDashing()  && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady())
+            if (sender.IsValidTarget(SpellManager.Q.Range) && sender.IsInvulnerable && sender == CurrentTarget && !sender.IsDashing()  && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady())
             {
                 
                 {
@@ -204,7 +204,7 @@ namespace SimpleAhri
                return;
             }
             CurrentTarget = TargetSelector.GetTarget(SpellManager.Q.Range, DamageType.Magical);
-            if (args.Target != CurrentTarget && !sender.IsDashing() && sender == CurrentTarget && !sender.IsDashing() && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady())
+            if (sender.IsValidTarget(SpellManager.Q.Range) && sender.IsInvulnerable && args.Target != CurrentTarget && !sender.IsDashing() && sender == CurrentTarget && !sender.IsDashing() && sender.IsValidTarget(SpellManager.Q.Range) && SpellManager.Q.IsReady())
             {
                 
                 if (args.End.Distance(Player.Instance.Position) <= 100)
