@@ -181,7 +181,7 @@ namespace SimpleAhri
 
         private static void Obj_AI_Base_OnBasicAttack(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (!Config.AutoHarass.Enabled && !Config.AutoHarass.UseQ && sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
+            if (Config.AutoHarass.Disabled && !Config.AutoHarass.UseQ && sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
                return;
             }
