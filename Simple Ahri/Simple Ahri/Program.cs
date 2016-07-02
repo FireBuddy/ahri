@@ -191,7 +191,7 @@ namespace SimpleAhri
                 
                 {
                     Chat.Print("basic Attack");
-                    SpellManager.Q.Cast(sender);
+                    SpellManager.Q.Cast(sender.ServerPosition);
                 }
 
             } 
@@ -217,13 +217,13 @@ namespace SimpleAhri
                 {
 
                     Chat.Print("Not Receiving damage" +args.SData.Name);
-                    SpellManager.Q.Cast(sender);
+                    SpellManager.Q.Cast(sender.ServerPosition);
 
                 }                
                 if (args.Target != null)
                 {
                     Chat.Print("targetspell"+args.SData.Name);
-                    SpellManager.Q.Cast(sender);
+                    SpellManager.Q.Cast(sender.ServerPosition);
 
                 }
 
