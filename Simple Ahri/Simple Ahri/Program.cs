@@ -210,7 +210,7 @@ namespace SimpleAhri
                     Chat.Print(args.SData.Name);
                     SpellManager.Q.Cast(sender.ServerPosition);
                 }
-                if (args.End.Distance(Player.Instance.Position) <= 200)
+                if (args.End.Distance(Player.Instance.Position) <= 100)
                 {
                     Chat.Print("Receiving damage");
 
