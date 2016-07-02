@@ -213,7 +213,7 @@ namespace SimpleAhri
 
 
                  }
-                if (args.End.Distance(Player.Instance.Position) >= 100 && args.SData.Name == "LucianE")
+                if (args.End.Distance(Player.Instance.Position) >= 100 && args.SData.Name == "RenektonSliceAndDice")
                 {
 
                     Chat.Print("Not Receiving damage" +args.SData.Name);
