@@ -57,24 +57,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PathFinding.cs" />
-    <Compile Include="SkillshotTypes\CircularMissileSkillshot.cs" />
-    <Compile Include="EvadeMenu.cs" />
-    <Compile Include="EvadePlus.cs" />
-    <Compile Include="AutoPathing.cs" />
-    <Compile Include="EvadeSpellManager.cs" />
-    <Compile Include="SkillshotTypes\LinearMissileSkillshot.cs" />
-    <Compile Include="SkillshotDatabase.cs" />
-    <Compile Include="EvadeSkillshot.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SkillshotTypes\SpecialTypes\SummonerMark.cs" />
-    <Compile Include="SkillshotTypes\SpecialTypes\YasuoQ.cs" />
-    <Compile Include="SpellData.cs" />
-    <Compile Include="SkillshotDetector.cs" />
-    <Compile Include="Utils.cs" /
-    <ItemGroup>
-    <ItemGroup>
+    <Compile Include="EvadePlus\PathFinding.cs" />
+    <Compile Include="EvadePlus\SkillshotTypes\CircularMissileSkillshot.cs" />
+    <Compile Include="EvadePlus\EvadeMenu.cs" />
+    <Compile Include="EvadePlus\EvadePlus.cs" />
+    <Compile Include="EvadePlus\AutoPathing.cs" />
+    <Compile Include="EvadePlus\EvadeSpellManager.cs" />
+    <Compile Include="EvadePlus\SkillshotTypes\LinearMissileSkillshot.cs" />
+    <Compile Include="EvadePlus\SkillshotDatabase.cs" />
+    <Compile Include="EvadePlus\EvadeSkillshot.cs" />
+    <Compile Include="EvadePlus\Program.cs" />
+    <Compile Include="EvadePlus\Properties\AssemblyInfo.cs" />
+    <Compile Include="EvadePlus\SkillshotTypes\SpecialTypes\SummonerMark.cs" />
+    <Compile Include="EvadePlus\SkillshotTypes\SpecialTypes\YasuoQ.cs" />
+    <Compile Include="EvadePlus\SpellData.cs" />
+    <Compile Include="EvadePlus\SkillshotDetector.cs" />
+    <Compile Include="EvadePlus\Utils.cs" /
     <Compile Include="PermaShow.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Damages.cs" />
