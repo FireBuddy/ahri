@@ -67,7 +67,7 @@ namespace SimpleAhri
 
             if (Config.Drawings.DrawPermashow)
             {
-                PermaShow.Initalize();
+               
             }
 
             InfoText = new Text[3];
