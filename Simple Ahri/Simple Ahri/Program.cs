@@ -48,7 +48,7 @@ namespace SimpleAhri
         {
             if (Player.Instance.ChampionName != ChampName)
             {
-                return;
+                //return;
             }
 
             Config.Initialize();
