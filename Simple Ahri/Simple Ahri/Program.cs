@@ -198,7 +198,7 @@ namespace SimpleAhri
         }
         private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            
+            Chat.Print(args.SData.Name);
             if (sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
                return;
