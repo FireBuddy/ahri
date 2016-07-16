@@ -61,6 +61,7 @@ namespace SimpleAhri
             Game.OnTick += Game_OnTick;
             Game.OnUpdate += Game_OnGameUpdate;
             GameObject.OnCreate += GameObject_OnCreate;
+            GameObject.OnCreate += GameObject_OnCreate2;
             GameObject.OnDelete += GameObject_OnDelete;
             HPBarIndicator.Initalize();
             Obj_AI_Base.OnBasicAttack += Obj_AI_Base_OnBasicAttack;
@@ -330,6 +331,16 @@ namespace SimpleAhri
                 }
             }
         }
+        
+        private static void GameObject_OnCreate2(GameObject sender, EventArgs args)
+        {
+            if(sender.IsAlly)
+            {
+                Chat.Print(args.Name);
+            }
+
+        }
+
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
         {
