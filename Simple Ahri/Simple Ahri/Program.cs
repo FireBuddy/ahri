@@ -336,7 +336,7 @@ namespace SimpleAhri
         {
             if(sender.IsAlly)
             {
-                Chat.Print(args.Name);
+                Chat.Print(sender.Name);
             }
 
         }
