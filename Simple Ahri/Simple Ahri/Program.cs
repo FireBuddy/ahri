@@ -42,7 +42,7 @@ namespace SimpleAhri
         public static void Main(string[] args)
         {
             
-            if (SpectatorDebugMode.TryLoad()) return;
+            Loading.OnLoadingCompleteSpectatorMode += OnLoadingComplete;
             
             Loading.OnLoadingComplete += OnLoadingComplete;
         }
