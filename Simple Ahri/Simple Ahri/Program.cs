@@ -98,21 +98,7 @@ namespace SimpleAhri
             Helpers.PrintInfoMessage("Addon loaded !");
         }
         
-        public static class SpectatorDebugMode
-        {
-            public static bool TryLoad()
-            {
-                //Read Section: Spectator Mode Loading Check
-                if (!Bootstrap.IsSpectatorMode) return false;
-                Loading.OnLoadingCompleteSpectatorMode += LoadSpectatorModeDebug;
-                return true;
-            }
-    
-            private static void LoadSpectatorModeDebug(System.EventArgs args)
-            {
-                 Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
-            } 
-        }
+
         
         private static void Game_OnGameUpdate(EventArgs args)
         {
@@ -458,5 +444,20 @@ namespace SimpleAhri
 
             Drawing.DrawLine(x.X, x.Y, y.X, y.Y, 3, Color.DeepPink);
         }
+    }
+    public static class SpectatorDebugMode
+    {
+            public static bool TryLoad()
+            {
+                //Read Section: Spectator Mode Loading Check
+                if (!Bootstrap.IsSpectatorMode) return false;
+                Loading.OnLoadingCompleteSpectatorMode += LoadSpectatorModeDebug;
+                return true;
+            }
+    
+            private static void LoadSpectatorModeDebug(System.EventArgs args)
+            {
+                 Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
+            } 
     }
 }
