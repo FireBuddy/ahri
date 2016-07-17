@@ -50,6 +50,7 @@ namespace SimpleAhri
         private static void OnLoadingComplete2(EventArgs args)
         {
              Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast3;
+             GameObject.OnCreate += GameObject_OnCreate3;
         }
 
         private static void OnLoadingComplete(EventArgs args)
@@ -352,14 +353,15 @@ namespace SimpleAhri
             }
         }
         
-        private static void GameObject_OnCreate2(GameObject sender, EventArgs args)
-        {
-            if(sender.IsAlly)
+        private static void GameObject_OnCreate3(GameObject sender, EventArgs args)
             {
-                Chat.Print(sender.Name);
+                  var enemy = sender as AIHeroClient;
+                  if(enemy.Hero == Champion.Viktor)
+                  {
+                    Chat.Print( "oncreate" + args.SData.Name);
+                    Chat.Print( "oncreate" + sender);
+                  }    
             }
-
-        }
 
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
