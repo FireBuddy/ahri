@@ -42,9 +42,14 @@ namespace SimpleAhri
         public static void Main(string[] args)
         {
             
-            Loading.OnLoadingCompleteSpectatorMode += OnLoadingComplete;
+            Loading.OnLoadingCompleteSpectatorMode += OnLoadingComplete2;
             
             Loading.OnLoadingComplete += OnLoadingComplete;
+        }
+        
+        private static void OnLoadingComplete2(EventArgs args)
+        {
+             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
         }
 
         private static void OnLoadingComplete(EventArgs args)
