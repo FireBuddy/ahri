@@ -103,10 +103,12 @@ namespace SimpleAhri
             Helpers.PrintInfoMessage("Addon loaded !");
         }
         
-        private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        private static void Obj_AI_Base_OnProcessSpellCast3(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if(sender )
-            Chat.Print(args.SData.Name);
+            if(sender.Hero == Champion.Viktor)
+            {
+                Chat.Print(args.SData.Name);
+            }    
         }    
 
         
