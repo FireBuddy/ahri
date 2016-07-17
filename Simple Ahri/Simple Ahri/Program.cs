@@ -358,7 +358,7 @@ namespace SimpleAhri
                   var enemy = sender as AIHeroClient;
                   if(enemy.Hero == Champion.Viktor)
                   {
-                    Chat.Print( "oncreate" + args.SData.Name);
+
                     Chat.Print( "oncreate" + sender.Name);
                   }    
         }
