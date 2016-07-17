@@ -134,7 +134,7 @@ namespace SimpleAhri
         {
              
              Circle.Draw(SharpDX.Color.Aqua, 100, Config.Drawings.DrawingBorderWidth,LastPosition2);
-            
+             Circle.Draw(SharpDX.Color.Red, 100, Config.Drawings.DrawingBorderWidth,LastPosition);
         }
         
 
