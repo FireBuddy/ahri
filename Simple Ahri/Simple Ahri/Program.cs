@@ -110,8 +110,8 @@ namespace SimpleAhri
     
             private static void LoadSpectatorModeDebug(System.EventArgs args)
             {
-                //Read Section: Spectator Mode Loaded
-            }
+                 Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
+            } 
         }
         
         private static void Game_OnGameUpdate(EventArgs args)
@@ -239,13 +239,13 @@ namespace SimpleAhri
                 {
 
                     Chat.Print("Not Receiving damage" +args.SData.Name);
-                    SpellManager.Q.Cast(sender.ServerPosition);
+           //         SpellManager.Q.Cast(sender.ServerPosition);
 
                 }                
                 if (args.Target != null)
                 {
                     Chat.Print("targetspell"+args.SData.Name);
-                    SpellManager.Q.Cast(sender.ServerPosition);
+         //           SpellManager.Q.Cast(sender.ServerPosition);
 
                 }
 
