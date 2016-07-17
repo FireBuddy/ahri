@@ -105,7 +105,8 @@ namespace SimpleAhri
         
         private static void Obj_AI_Base_OnProcessSpellCast3(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if(sender.Hero == Champion.Viktor)
+            var enemy = sender as AIHeroClient;
+            if(enemy.Hero == Champion.Viktor)
             {
                 Chat.Print(args.SData.Name);
             }    
