@@ -49,7 +49,7 @@ namespace SimpleAhri
         
         private static void OnLoadingComplete2(EventArgs args)
         {
-             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
+             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast3;
         }
 
         private static void OnLoadingComplete(EventArgs args)
@@ -103,6 +103,11 @@ namespace SimpleAhri
             Helpers.PrintInfoMessage("Addon loaded !");
         }
         
+        private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            if(sender )
+            Chat.Print(args.SData.Name);
+        }    
 
         
         private static void Game_OnGameUpdate(EventArgs args)
@@ -462,12 +467,15 @@ namespace SimpleAhri
     
             private static void LoadSpectatorModeDebug(System.EventArgs args)
             {
-                 Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
+                 Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast3;
 
             }
-            private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+            private static void Obj_AI_Base_OnProcessSpellCast3(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
             {
-                  Chat.Print(args.SData.Name);
+                  if(sender.Hero == Champion.Viktor)
+                  {
+                    Chat.Print( "process" + args.SData.Name);
+                  }    
             }
             
     }
