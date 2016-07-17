@@ -112,7 +112,7 @@ namespace SimpleAhri
         private static void Obj_AI_Base_OnProcessSpellCast3(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             var enemy = sender as AIHeroClient;
-            if(enemy.Hero == Champion.Viktor && args.SData.Name == ViktorDeathRay)
+            if(enemy.Hero == Champion.Viktor && args.SData.Name == "ViktorDeathRay")
             {
                 Vector3 LastPosition2 = args.End;
                 Vector3 LastPosition = args.Start;
