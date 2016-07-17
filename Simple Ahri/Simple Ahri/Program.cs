@@ -70,7 +70,7 @@ namespace SimpleAhri
             Game.OnTick += Game_OnTick;
             Game.OnUpdate += Game_OnGameUpdate;
             GameObject.OnCreate += GameObject_OnCreate;
-            GameObject.OnCreate += GameObject_OnCreate2;
+          //  GameObject.OnCreate += GameObject_OnCreate2;
             GameObject.OnDelete += GameObject_OnDelete;
             HPBarIndicator.Initalize();
             Obj_AI_Base.OnBasicAttack += Obj_AI_Base_OnBasicAttack;
@@ -358,7 +358,7 @@ namespace SimpleAhri
                   var enemy = sender as AIHeroClient;
                   if(enemy.Hero == Champion.Viktor)
                   {
-
+                    Chat.Print( "oncreate" + args.SData.Name);
                     Chat.Print( "oncreate" + sender);
                   }    
         }
