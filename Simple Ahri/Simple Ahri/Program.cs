@@ -36,6 +36,10 @@ namespace SimpleAhri
         public static Spell.Targeted Flash;
         
         public static Obj_AI_Minion Minion;
+        
+        public static Vector3 LastPosition = new Vector3(0, 0, 0);
+        
+        public static Vector3 LastPosition2 = new Vector3(0, 0, 0);
 
         public static MissileClient QOrbMissile, QReturnMissile;
 
@@ -51,6 +55,7 @@ namespace SimpleAhri
         {
              Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast3;
              GameObject.OnCreate += GameObject_OnCreate3;
+             Drawing.OnDraw += OnDraw3;
         }
 
         private static void OnLoadingComplete(EventArgs args)
@@ -107,8 +112,10 @@ namespace SimpleAhri
         private static void Obj_AI_Base_OnProcessSpellCast3(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             var enemy = sender as AIHeroClient;
-            if(enemy.Hero == Champion.Viktor)
+            if(enemy.Hero == Champion.Viktor && args.SData.Name == ViktorDeathRay)
             {
+                Vector3 LastPosition2 = args.End;
+                Vector3 LastPosition = args.Start;
                 Chat.Print(args.SData.Name);
             }    
         }    
@@ -121,6 +128,11 @@ namespace SimpleAhri
             CastEFlash();
             }
 
+        }
+        
+        private static void OnDraw3(EventArgs args)
+        {
+            
         }
         
         
