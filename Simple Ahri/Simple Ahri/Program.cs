@@ -458,10 +458,12 @@ namespace SimpleAhri
             private static void LoadSpectatorModeDebug(System.EventArgs args)
             {
                  Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
-                 private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
-                 {
+
+            }
+            private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+            {
                   Chat.Print(args.SData.Name);
-                 }
-            } 
+            }
+            
     }
 }
