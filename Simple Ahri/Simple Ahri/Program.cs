@@ -354,14 +354,14 @@ namespace SimpleAhri
         }
         
         private static void GameObject_OnCreate3(GameObject sender, EventArgs args)
-            {
+        {
                   var enemy = sender as AIHeroClient;
                   if(enemy.Hero == Champion.Viktor)
                   {
                     Chat.Print( "oncreate" + args.SData.Name);
                     Chat.Print( "oncreate" + sender);
                   }    
-            }
+        }
 
 
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
