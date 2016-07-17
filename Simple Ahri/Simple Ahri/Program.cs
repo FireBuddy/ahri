@@ -41,6 +41,9 @@ namespace SimpleAhri
 
         public static void Main(string[] args)
         {
+            
+            if (SpectatorDebugMode.TryLoad()) return;
+            
             Loading.OnLoadingComplete += OnLoadingComplete;
         }
 
@@ -95,6 +98,22 @@ namespace SimpleAhri
             Helpers.PrintInfoMessage("Addon loaded !");
         }
         
+        public static class SpectatorDebugMode
+        {
+            public static bool TryLoad()
+            {
+                //Read Section: Spectator Mode Loading Check
+                if (!Bootstrap.IsSpectatorMode) return false;
+                Loading.OnLoadingCompleteSpectatorMode += LoadSpectatorModeDebug;
+                return true;
+            }
+    
+            private static void LoadSpectatorModeDebug(System.EventArgs args)
+            {
+                //Read Section: Spectator Mode Loaded
+            }
+        }
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
            if (Config.Modes.Combo.UseEFlash)
@@ -103,6 +122,8 @@ namespace SimpleAhri
             }
 
         }
+        
+        
 
 
         
