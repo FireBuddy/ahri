@@ -119,6 +119,7 @@ namespace SimpleAhri
                 Chat.Print(args.SData.Name);
                 Chat.Print("End" + args.End);
                 Chat.Print("Start" + args.End);
+                Chat.Print("Start" + sender.ServerPosition);
             }    
         }    
 
