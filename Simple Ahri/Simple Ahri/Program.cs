@@ -132,8 +132,8 @@ namespace SimpleAhri
         
         public static void OnDraw3(EventArgs args)
         {
-             var position = Vector3 LastPosition2;
-             Circle.Draw(SharpDX.Color.Aqua, 100, Config.Drawings.DrawingBorderWidth, Player.Instance.Position);
+             
+             Circle.Draw(SharpDX.Color.Aqua, 100, Config.Drawings.DrawingBorderWidth, Vector3 LastPosition2Position);
             
         }
         
