@@ -376,6 +376,7 @@ namespace SimpleAhri
                   {
 
                     Chat.Print( "oncreate" + sender.Name);
+                    Chat.Print( "oncreate" + args.Name);
                   }    
         }
 
