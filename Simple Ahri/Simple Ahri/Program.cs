@@ -117,6 +117,8 @@ namespace SimpleAhri
                 Vector3 LastPosition2 = args.End;
                 Vector3 LastPosition = args.Start;
                 Chat.Print(args.SData.Name);
+                Chat.Print("End" + args.End);
+                Chat.Print("Start" + args.End);
             }    
         }    
 
