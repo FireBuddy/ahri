@@ -45,18 +45,9 @@ namespace SimpleAhri
 
         public static void Main(string[] args)
         {
-            
-            Loading.OnLoadingCompleteSpectatorMode += OnLoadingComplete2;
-            
-            Loading.OnLoadingComplete += OnLoadingComplete;
+                Loading.OnLoadingComplete += OnLoadingComplete;
         }
         
-        private static void OnLoadingComplete2(EventArgs args)
-        {
-             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast3;
-             GameObject.OnCreate += GameObject_OnCreate3;
-             Drawing.OnDraw += OnDraw3;
-        }
 
         private static void OnLoadingComplete(EventArgs args)
         {
@@ -109,19 +100,6 @@ namespace SimpleAhri
             Helpers.PrintInfoMessage("Addon loaded !");
         }
         
-        private static void Obj_AI_Base_OnProcessSpellCast3(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
-        {
-            var enemy = sender as AIHeroClient;
-            if(enemy.Hero == Champion.Viktor && args.SData.Name == "ViktorDeathRay")
-            {
-                Vector3 LastPosition2 = args.End;
-                Vector3 LastPosition = args.Start;
-                Chat.Print(args.SData.Name);
-                Chat.Print("End" + args.End);
-                Chat.Print("Start" + args.End);
-                Chat.Print("Player" + sender.ServerPosition);
-            }    
-        }    
 
         
         private static void Game_OnGameUpdate(EventArgs args)
@@ -133,15 +111,7 @@ namespace SimpleAhri
 
         }
         
-        public static void OnDraw3(EventArgs args)
-        {
-             
-             Circle.Draw(SharpDX.Color.Aqua, 100, Config.Drawings.DrawingBorderWidth,LastPosition2);
-             Circle.Draw(SharpDX.Color.Red, 100, Config.Drawings.DrawingBorderWidth,LastPosition);
-        }
         
-
-
         
         private static void CastEFlash()
         {
@@ -477,29 +447,5 @@ namespace SimpleAhri
             Drawing.DrawLine(x.X, x.Y, y.X, y.Y, 3, Color.DeepPink);
         }
     }
-    public static class SpectatorDebugMode
-    {
-            public static bool TryLoad()
-            {
-                //Read Section: Spectator Mode Loading Check
-                if (!Bootstrap.IsSpectatorMode) return false;
-                Loading.OnLoadingCompleteSpectatorMode += LoadSpectatorModeDebug;
-                return true;
-            }
-    
-            private static void LoadSpectatorModeDebug(System.EventArgs args)
-            {
-                 Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast3;
 
-            }
-            private static void Obj_AI_Base_OnProcessSpellCast3(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
-            {
-                  var enemy = sender as AIHeroClient;
-                  if(enemy.Hero == Champion.Viktor)
-                  {
-                    Chat.Print( "process" + args.SData.Name);
-                  }    
-            }
-            
-    }
 }
