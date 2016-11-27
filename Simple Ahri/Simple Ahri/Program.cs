@@ -206,7 +206,7 @@ namespace SimpleAhri
         }
         private static void Obj_AI_Base_OnProcessSpellCast2(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            Chat.Print(args.SData.Name);
+            //Chat.Print(args.SData.Name);
             if (sender == null || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
                return;
@@ -224,14 +224,14 @@ namespace SimpleAhri
                 if (args.End.Distance(Player.Instance.Position) >= 100)
                 {
 
-                 //  Chat.Print("Not Receiving damage" +args.SData.Name);
-                 //   SpellManager.Q.Cast(sender.ServerPosition);
+                   Chat.Print("Not Receiving damage" +args.SData.Name);
+                    SpellManager.Q.Cast(sender.ServerPosition);
 
                 }                
                 if (args.Target != null)
                 {
-                 //   Chat.Print("targetspell"+args.SData.Name);
-                 //   SpellManager.Q.Cast(sender.ServerPosition);
+                    Chat.Print("targetspell"+args.SData.Name);
+                    SpellManager.Q.Cast(sender.ServerPosition);
 
                 }
 
