@@ -62,7 +62,7 @@ namespace SimpleAhri
             Drawing.OnDraw += OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
-            //Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
+            Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
             Game.OnTick += Game_OnTick;
             Game.OnUpdate += Game_OnGameUpdate;
             GameObject.OnCreate += GameObject_OnCreate;
@@ -217,21 +217,21 @@ namespace SimpleAhri
                 
                 if (args.End.Distance(Player.Instance.Position) <= 100)
                 {
-                   Chat.Print("Receiving damage"+args.SData.Name);
+                    Chat.Print("Receiving damage"+args.SData.Name);
 
 
                  }
                 if (args.End.Distance(Player.Instance.Position) >= 100)
                 {
 
-                    Chat.Print("Not Receiving damage" +args.SData.Name);
-           //         SpellManager.Q.Cast(sender.ServerPosition);
+                 //  Chat.Print("Not Receiving damage" +args.SData.Name);
+                 //   SpellManager.Q.Cast(sender.ServerPosition);
 
                 }                
                 if (args.Target != null)
                 {
-                    Chat.Print("targetspell"+args.SData.Name);
-         //           SpellManager.Q.Cast(sender.ServerPosition);
+                 //   Chat.Print("targetspell"+args.SData.Name);
+                 //   SpellManager.Q.Cast(sender.ServerPosition);
 
                 }
 
