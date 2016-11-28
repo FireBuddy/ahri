@@ -48,7 +48,7 @@ namespace SimpleAhri.Modes
             if (Settings.UseE && E.IsReady())
             {
                 var prediction = E.GetPrediction(target);
-                if (prediction.HitChancePercent >= 92 && (target.IsInRange(Player.Instance, 800)|| !target.CanMove))
+                if (prediction.HitChancePercent >= 98 && (target.IsInRange(Player.Instance, 800)|| !target.CanMove))
                 {
                     E.Cast(prediction.CastPosition);
                 }
