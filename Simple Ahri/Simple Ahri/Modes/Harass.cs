@@ -21,7 +21,7 @@ namespace SimpleAhri.Modes
             {
                 var prediction = Q.GetPrediction(target);
 
-                if (prediction.HitChancePercent >= 85)
+                if (prediction.HitChancePercent >= 90)
                 {
                     Q.Cast(prediction.CastPosition);
                 }
