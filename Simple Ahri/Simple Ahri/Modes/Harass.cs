@@ -17,11 +17,11 @@ namespace SimpleAhri.Modes
             if (target == null)
                 return;
 
-            if (Q.IsReady() && (Settings.UseQ || !target.CanMove) && Player.Instance.ManaPercent >= Settings.QMana && target.IsInRange(Player.Instance, Q.Range - 100))
+            if (Q.IsReady() && (Settings.UseQ || !target.CanMove) && Player.Instance.ManaPercent >= Settings.QMana && target.IsInRange(Player.Instance, Q.Range - 30))
             {
                 var prediction = Q.GetPrediction(target);
 
-                if (prediction.HitChancePercent >= 80)
+                if (prediction.HitChancePercent >= 85)
                 {
                     Q.Cast(target);
                 }
