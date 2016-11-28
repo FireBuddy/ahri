@@ -48,11 +48,11 @@ namespace SimpleAhri.Modes
             if (Settings.UseE && E.IsReady())
             {
                 var prediction = E.GetPrediction(target);
-                if (prediction.HitChancePercent >= 80 && (target.IsInRange(Player.Instance, 500)|| !target.CanMove))
+                if (prediction.HitChancePercent >= 92 && (target.IsInRange(Player.Instance, 800)|| !target.CanMove))
                 {
                     E.Cast(prediction.CastPosition);
                 }
-                if (prediction.HitChancePercent >= 80 && target.IsInRange(Player.Instance, 800) && NavMesh.IsWallOfGrass(Player.Instance.Position, 0))
+                if (prediction.HitChancePercent >= 90 && target.IsInRange(Player.Instance, 800) && NavMesh.IsWallOfGrass(Player.Instance.Position, 0))
                 {
                     E.Cast(prediction.CastPosition);
                 }
