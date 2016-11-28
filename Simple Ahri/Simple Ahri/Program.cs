@@ -62,14 +62,14 @@ namespace SimpleAhri
             Drawing.OnDraw += OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
-            Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
+            //Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast2;
             Game.OnTick += Game_OnTick;
             Game.OnUpdate += Game_OnGameUpdate;
             GameObject.OnCreate += GameObject_OnCreate;
           //  GameObject.OnCreate += GameObject_OnCreate2;
             GameObject.OnDelete += GameObject_OnDelete;
             HPBarIndicator.Initalize();
-            Obj_AI_Base.OnBasicAttack += Obj_AI_Base_OnBasicAttack;
+            //Obj_AI_Base.OnBasicAttack += Obj_AI_Base_OnBasicAttack;
 
             if (Config.Drawings.DrawPermashow)
             {
