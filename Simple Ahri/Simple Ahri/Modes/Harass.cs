@@ -23,7 +23,7 @@ namespace SimpleAhri.Modes
 
                 if (prediction.HitChancePercent >= 85)
                 {
-                    Q.Cast(target);
+                    Q.Cast(prediction.CastPosition);
                 }
             }
 
